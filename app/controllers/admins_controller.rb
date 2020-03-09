@@ -42,8 +42,8 @@ class AdminsController < ApplicationController
   # PATCH/PUT /admins/1.json
   def update
     respond_to do |format|
-      if @admin.update(admin_params)
-        format.html { redirect_to @admin, notice: 'Admin was successfully updated.' }
+      if @admin.update(admin_params.permit(%i[email password password_confirmation]))
+        format.html { redirect_to @admin, notice: I18n.t(:edit, scope: :admin) }
         format.json { render :show, status: :ok, location: @admin }
       else
         format.html { render :edit }

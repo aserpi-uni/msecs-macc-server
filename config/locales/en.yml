@@ -31,6 +31,7 @@
 
 en:
   admin:
+    edit: "Admin was successfully edited."
     new: "Admin was successfully created."
 
   admin_mailer:
