@@ -57,6 +57,7 @@ en:
   create: "Create"
   destroy: "Destroy"
   edit: "Edit"
+  forbidden: "You are not authorized to perform this action"
 
   resource:
     failed_validation:

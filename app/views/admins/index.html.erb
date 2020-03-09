@@ -14,7 +14,7 @@
       <tr>
         <td><%= admin.email %></td>
         <td><%= link_to I18n.t(:show), admin %></td>
-        <td><%= link_to I18n.t(:edit), edit_admin_path(admin) %></td>
+        <td><%= link_to(I18n.t(:edit), edit_admin_path(admin)) if policy(admin).update? %></td>
         <td><%= link_to I18n.t(:destroy), admin, method: :delete, data: { confirm: I18n.t(:confirm) } %></td>
       </tr>
     <% end %>

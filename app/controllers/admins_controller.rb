@@ -1,5 +1,12 @@
 class AdminsController < ApplicationController
+  after_action :verify_authorized
   before_action :set_admin, only: [:show, :edit, :update, :destroy]
+  before_action only: %i[index show new create destroy] do
+    authorize Admin
+  end
+  before_action only: %i[edit update] do
+    authorize @admin
+  end
 
   # GET /admins
   # GET /admins.json
