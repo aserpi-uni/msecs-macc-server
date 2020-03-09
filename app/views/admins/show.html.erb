@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @admin.email %></h1>
+
+<% if policy(@admin).update? %>
+  <%= link_to t(:edit), edit_admin_path(@admin) %> |
+<% end %>
+
+<%= link_to t(:back), admins_path %>

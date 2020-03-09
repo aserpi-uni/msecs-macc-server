@@ -1,0 +1,5 @@
+<h1><%= t :new, scope: :admin %></h1>
+
+<%= render 'form', admin: @admin, password: false, submit_label: t(:create) %>
+
+<%= link_to t(:back), admins_path %>
