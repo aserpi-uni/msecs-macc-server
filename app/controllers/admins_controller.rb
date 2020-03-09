@@ -24,12 +24,13 @@ class AdminsController < ApplicationController
   # POST /admins
   # POST /admins.json
   def create
-    @admin = Admin.new(admin_params)
+    @admin = Admin.from_params(admin_params.permit(:email))
 
     respond_to do |format|
       if @admin.save
-        format.html { redirect_to @admin, notice: 'Admin was successfully created.' }
+        format.html { redirect_to @admin, notice: I18n.t(:new, scope: :admin) }
         format.json { render :show, status: :created, location: @admin }
+        AdminMailer.new_admin(@admin).deliver_later
       else
         format.html { render :new }
         format.json { render json: @admin.errors, status: :unprocessable_entity }
@@ -69,6 +70,6 @@ class AdminsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def admin_params
-      params.fetch(:admin, {})
+      params.require(:admin)
     end
 end

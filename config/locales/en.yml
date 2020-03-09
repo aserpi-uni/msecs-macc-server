@@ -30,4 +30,11 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  admin:
+    new: "Admin was successfully created."
+
+  admin_mailer:
+    new_admin:
+      subject: "New KeepTime account"
+      greetings: "Hello there, %{user}!"
+      body: 'In order to access the site you need to recover your password here: %{link}'
