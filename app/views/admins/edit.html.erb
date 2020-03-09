@@ -1,6 +1,6 @@
-<h1>Editing <%= @admin.email %></h1>
+<h1><%= t :editing, scope: :admin, admin: @admin.email %></h1>
 
-<%= render 'form', admin: @admin, password: true %>
+<%= render 'form', admin: @admin, password: true, submit_label: t(:edit) %>
 
-<%= link_to 'Show', @admin %> |
-<%= link_to 'Back', admins_path %>
+<%= link_to t(:show), @admin %> |
+<%= link_to t(:back), admins_path %>

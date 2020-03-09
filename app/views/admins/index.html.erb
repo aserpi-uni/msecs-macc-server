@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Admins</h1>
+<h1><%= Admin.model_name.human.capitalize.pluralize %></h1>
 
 <table>
   <thead>
@@ -13,9 +13,9 @@
     <% @admins.each do |admin| %>
       <tr>
         <td><%= admin.email %></td>
-        <td><%= link_to 'Show', admin %></td>
-        <td><%= link_to 'Edit', edit_admin_path(admin) %></td>
-        <td><%= link_to 'Destroy', admin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to I18n.t(:show), admin %></td>
+        <td><%= link_to I18n.t(:edit), edit_admin_path(admin) %></td>
+        <td><%= link_to I18n.t(:destroy), admin, method: :delete, data: { confirm: I18n.t(:confirm) } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -23,4 +23,4 @@
 
 <br>
 
-<%= link_to 'New Admin', new_admin_path %>
+<%= link_to t(:new, scope: :admin), new_admin_path %>

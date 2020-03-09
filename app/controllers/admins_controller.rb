@@ -28,7 +28,7 @@ class AdminsController < ApplicationController
 
     respond_to do |format|
       if @admin.save
-        format.html { redirect_to @admin, notice: I18n.t(:new, scope: :admin) }
+        format.html { redirect_to @admin, notice: I18n.t(:new_success, scope: :admin) }
         format.json { render :show, status: :created, location: @admin }
         AdminMailer.new_admin(@admin).deliver_later
       else
@@ -43,7 +43,7 @@ class AdminsController < ApplicationController
   def update
     respond_to do |format|
       if @admin.update(admin_params.permit(%i[email password password_confirmation]))
-        format.html { redirect_to @admin, notice: I18n.t(:edit, scope: :admin) }
+        format.html { redirect_to @admin, notice: I18n.t(:edit_success, scope: :admin) }
         format.json { render :show, status: :ok, location: @admin }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class AdminsController < ApplicationController
   def destroy
     @admin.destroy
     respond_to do |format|
-      format.html { redirect_to admins_url, notice: I18n.t(:destroy, scope: :admin) }
+      format.html { redirect_to admins_url, notice: I18n.t(:destroy_success, scope: :admin) }
       format.json { head :no_content }
     end
   end

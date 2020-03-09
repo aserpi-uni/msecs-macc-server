@@ -30,13 +30,37 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    attributes:
+      admin:
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+    models:
+      admin: "admin"
+
   admin:
-    destroy: "Admin was successfully destroyed."
-    edit: "Admin was successfully edited."
-    new: "Admin was successfully created."
+    destroy_success: "Admin was successfully destroyed."
+    edit_success: "Admin was successfully edited."
+    editing: "Editing %{admin}"
+    new: "New admin"
+    new_success: "Admin was successfully created."
 
   admin_mailer:
     new_admin:
       subject: "New KeepTime account"
       greetings: "Hello there, %{user}!"
       body: 'In order to access the site you need to recover your password here: %{link}'
+
+  back: "Back"
+  confirm: "Are you sure?"
+  create: "Create"
+  destroy: "Destroy"
+  edit: "Edit"
+
+  resource:
+    failed_validation:
+      one: "1 error prohibited this %{resource} from being saved:"
+      other: "%{count} errors prohibited this %{resource} from being saved:"
+
+  show: "Show"
