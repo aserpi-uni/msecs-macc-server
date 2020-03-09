@@ -1,6 +1,6 @@
 class AdminsController < ApplicationController
   after_action :verify_authorized
-  before_action :set_admin, only: [:show, :edit, :update, :destroy]
+  before_action :set_admin, only: %i[show edit update destroy]
   before_action only: %i[index show new create destroy] do
     authorize Admin
   end
@@ -16,8 +16,7 @@ class AdminsController < ApplicationController
 
   # GET /admins/1
   # GET /admins/1.json
-  def show
-  end
+  def show; end
 
   # GET /admins/new
   def new
@@ -25,8 +24,7 @@ class AdminsController < ApplicationController
   end
 
   # GET /admins/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /admins
   # POST /admins.json
@@ -70,13 +68,14 @@ class AdminsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_admin
-      @admin = Admin.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def admin_params
-      params.require(:admin)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_admin
+    @admin = Admin.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def admin_params
+    params.require(:admin)
+  end
 end
