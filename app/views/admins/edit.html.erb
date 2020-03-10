@@ -1,3 +1,5 @@
+<% provide :title, t(:editing, scope: :admin, admin: @admin.email) %>
+
 <h1><%= t :editing, scope: :admin, admin: @admin.email %></h1>
 
 <%= render 'form', admin: @admin, password: true, submit_label: t(:edit) %>

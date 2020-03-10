@@ -1,3 +1,5 @@
+<% provide :title, t(:new, scope: :admin) %>
+
 <h1><%= t :new, scope: :admin %></h1>
 
 <%= render 'form', admin: @admin, password: false, submit_label: t(:create) %>
