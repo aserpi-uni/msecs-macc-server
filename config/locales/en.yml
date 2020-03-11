@@ -45,6 +45,8 @@ en:
     editing: "Editing %{admin}"
     new: "New admin"
     new_success: "Admin was successfully created."
+    settings:
+      destroy: "Delete account"
 
   admin_mailer:
     new_admin:
@@ -53,12 +55,18 @@ en:
       body: 'In order to access the site you need to recover your password here: %{link}'
 
   back: "Back"
-  confirm: "Are you sure?"
+  cancel: "Cancel"
+  confirm: "Confirm"
   control_panel: "Control panel"
   create: "Create"
+  danger_zone: "Danger zone"
   destroy: "Destroy"
   edit: "Edit"
   forbidden: "You are not authorized to perform this action"
+
+  irreversible_action:
+    irreversible: "This action is irreversible."
+    sure?: "Are you sure?"
 
   resource:
     failed_validation:

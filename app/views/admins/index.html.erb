@@ -17,8 +17,6 @@
         <%= link_to admin.email, admin %>
 
         <%= link_to(t(:edit), edit_admin_path(admin)) if policy(admin).update? %>
-
-        <%= link_to t(:destroy), admin, method: :delete, data: { confirm: t(:confirm) } %>
       </div>
     <% end %>
   </div>

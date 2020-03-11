@@ -11,7 +11,14 @@
 </nav>
 
 <div class="jumbotron align-items-center">
-  <h2><%= t :editing, scope: :admin, admin: @admin.email %></h2>
+  <h2>
+    <%= t :editing, scope: :admin, admin: @admin.email %>
+  </h2>
 
   <%= render 'form', admin: @admin, password: true, submit_label: t(:edit) %>
+
+  <div class="mt-4"></div>
+  <%= render 'danger_zone' %>
 </div>
+
+<%= render partial: 'application/modal_irreversible', locals: { path: @admin } %>
