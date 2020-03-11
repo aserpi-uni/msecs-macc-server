@@ -11,6 +11,7 @@ class AdminsController < ApplicationController
   # GET /admins
   # GET /admins.json
   def index
+    # TODO: paginate
     @admins = Admin.all
   end
 

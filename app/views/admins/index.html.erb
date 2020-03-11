@@ -11,24 +11,17 @@
 <div class="jumbotron align-items-center">
   <h2><%= title %></h2>
 
-  <table>
-    <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-    </thead>
-
-    <tbody>
+  <div class="list-group list-group-flush">
     <% @admins.each do |admin| %>
-      <tr>
-        <td><%= admin.email %></td>
-        <td><%= link_to I18n.t(:show), admin %></td>
-        <td><%= link_to(I18n.t(:edit), edit_admin_path(admin)) if policy(admin).update? %></td>
-        <td><%= link_to I18n.t(:destroy), admin, method: :delete, data: { confirm: I18n.t(:confirm) } %></td>
-      </tr>
+      <div class="list-group-item list-group-item-action">
+        <%= link_to admin.email, admin %>
+
+        <%= link_to(t(:edit), edit_admin_path(admin)) if policy(admin).update? %>
+
+        <%= link_to t(:destroy), admin, method: :delete, data: { confirm: t(:confirm) } %>
+      </div>
     <% end %>
-    </tbody>
-  </table>
+  </div>
 
   <br>
 
