@@ -1,4 +1,6 @@
 <% title = Admin.model_name.human.capitalize.pluralize %>
+
+<% provide :section, 'admin' %>
 <% provide :title, title %>
 
 <nav aria-label="breadcrumb">
@@ -15,8 +17,6 @@
     <% @admins.each do |admin| %>
       <div class="list-group-item list-group-item-action">
         <%= link_to admin.email, admin %>
-
-        <%= link_to(t(:edit), edit_admin_path(admin)) if policy(admin).update? %>
       </div>
     <% end %>
   </div>
@@ -24,5 +24,4 @@
   <br>
 
   <%= link_to t(:new, scope: :admin), new_admin_path %>
-  <%= link_to t(:sign_out), destroy_admin_session_path, method: :delete %>
 </div>

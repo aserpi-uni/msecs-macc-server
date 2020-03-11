@@ -54,6 +54,10 @@ en:
       greetings: "Hello there, %{user}!"
       body: 'In order to access the site you need to recover your password here: %{link}'
 
+  aria:
+    dropdown: "Toggle dropdown"
+    navigation: "Toggle navigation"
+
   back: "Back"
   cancel: "Cancel"
   confirm: "Confirm"
@@ -73,5 +77,6 @@ en:
       one: "1 error prohibited this %{resource} from being saved:"
       other: "%{count} errors prohibited this %{resource} from being saved:"
 
+  settings: "Settings"
   show: "Show"
   sign_out: "Logout"

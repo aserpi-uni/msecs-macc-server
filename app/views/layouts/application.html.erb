@@ -11,6 +11,8 @@
   </head>
 
   <body>
+    <%= render partial: 'navbar', locals: { section: yield(:section) } %>
+
     <%= render partial: 'flash' %>
 
     <div class="container mt-3">

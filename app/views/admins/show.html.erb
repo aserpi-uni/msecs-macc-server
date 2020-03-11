@@ -1,4 +1,6 @@
 <% title = @admin.email %>
+
+<% provide :section, 'admin' %>
 <% provide :title, title %>
 
 <nav aria-label="breadcrumb">
@@ -13,10 +15,6 @@
 
 <div class="jumbotron align-items-center">
   <h2><%= title %></h2>
-
-  <% if policy(@admin).update? %>
-    <%= link_to t(:edit), edit_admin_path(@admin) %>
-  <% end %>
 
   <% if policy(@admin).destroy? && @admin != current_admin %>
     <%= render 'danger_zone' %>
