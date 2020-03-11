@@ -1,0 +1,21 @@
+<div id="flash_messages">
+  <% flash.each do |msg_type, msg| %>
+    <div class="alert <%= bootstrap_class_for msg_type %> alert-dismissible fade show shadow-sm col-7 mx-auto my-2" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <i class="material-icons" aria-hidden="true">close</i>
+      </button>
+
+      <span class="material-icons mr-2" aria-hidden="true">
+        <% if %w(alert-warning alert-danger).include? bootstrap_class_for(msg_type) %>
+          warning
+        <% elsif bootstrap_class_for(msg_type) == 'alert-success' %>
+          check_circle
+        <% else %>
+          info
+        <% end %>
+      </span>
+
+      <%= msg %>
+    </div> <!-- single message -->
+  <% end %>
+</div> <!-- all messages -->

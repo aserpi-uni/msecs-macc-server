@@ -1,0 +1,24 @@
+<% t_scope = %i[devise unlocks]%>
+
+<% provide :title, t(:title, scope: t_scope) %>
+
+<div class="jumbotron">
+  <h2>
+    <%= t :title, scope: t_scope %>
+  </h2>
+
+  <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+    <%= render "error_messages", resource: resource %>
+
+    <div class="form-group">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: true %>
+    </div>
+
+    <%= f.submit t(:submit, scope: t_scope), class: "btn btn-primary" %>
+  <% end %>
+
+  <div class="mt-3"></div>
+
+  <%= render "devise/shared/links" %>
+</div>

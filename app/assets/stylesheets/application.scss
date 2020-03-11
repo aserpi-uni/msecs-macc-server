@@ -12,4 +12,13 @@
  *
  *= require_tree .
  *= require_self
+ *= require daemonite-material
  */
+
+.btn-compact {
+  min-width: revert !important;
+}
+
+.button-delete {
+  max-width: 100% !important;
+}

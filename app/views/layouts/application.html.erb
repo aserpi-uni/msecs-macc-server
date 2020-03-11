@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>KeeptimeServer</title>
+    <title><%= yield :title %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
   <body>
-    <p class="alert"><%= alert %></p>
+    <%= render partial: 'navbar', locals: { section: yield(:section) } %>
 
-    <%= yield %>
+    <%= render partial: 'flash' %>
+
+    <div class="container mt-3">
+      <%= yield %>
+    </div>
   </body>
 </html>

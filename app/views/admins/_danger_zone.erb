@@ -1,0 +1,19 @@
+<h4>
+  <%= t :danger_zone %>
+</h4>
+
+<div class="border border-danger rounded">
+  <div class="list-group list-group-flush">
+    <div class="list-group-item">
+      <div class="row align-items-center justify-content-between mx-1">
+          <span>
+            <%= t :destroy, scope: [:admin, :settings] %>
+          </span>
+
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalIrreversible">
+          <%= t :destroy %>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

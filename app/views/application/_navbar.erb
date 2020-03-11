@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">
+    KeepTime
+  </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<%= t :navigation, scope: :aria %>">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <% if current_admin %>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item<%= ' active' if section == 'admin' %>">
+          <%= link_to Admin.model_name.human.pluralize.capitalize, admins_path, class: "nav-link" %>
+        </li>
+      </ul>
+
+      <div>
+        <div class="btn-group btn-group-fluid">
+          <%= link_to current_admin.email, current_admin, class: "btn btn-outline-light" %>
+
+          <button type="button" class="btn btn-outline-light dropdown-toggle dropdown-toggle-split"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">
+              <%= t :dropdown, scope: :aria %>
+            </span>
+          </button>
+
+          <div class="dropdown-menu">
+            <%= link_to t(:settings), edit_admin_path(current_admin), class: "dropdown-item" %>
+
+            <%= link_to t(:sign_out), destroy_admin_session_path, method: :delete, class: "dropdown-item" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</nav>

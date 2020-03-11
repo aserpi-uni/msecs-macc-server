@@ -1,6 +1,25 @@
-<h1><%= t :editing, scope: :admin, admin: @admin.email %></h1>
+<% provide :section, 'admin' %>
+<% provide :title, t(:editing, scope: :admin, admin: @admin.email) %>
 
-<%= render 'form', admin: @admin, password: true, submit_label: t(:edit) %>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render partial: 'application/breadcrumbs/control_panel' %>
+    <%= render partial: 'application/breadcrumbs/admins', locals: { active: false } %>
+    <%= render partial: 'application/breadcrumbs/update', locals: {
+        active: false, name: @admin.email, resource: @admin
+    } %>
+  </ol>
+</nav>
 
-<%= link_to t(:show), @admin %> |
-<%= link_to t(:back), admins_path %>
+<div class="jumbotron align-items-center">
+  <h2>
+    <%= t :editing, scope: :admin, admin: @admin.email %>
+  </h2>
+
+  <%= render 'form', admin: @admin, password: true, submit_label: t(:edit) %>
+
+  <div class="mt-4"></div>
+  <%= render 'danger_zone' %>
+</div>
+
+<%= render partial: 'application/modal_irreversible', locals: { path: @admin } %>
