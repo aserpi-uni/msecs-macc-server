@@ -1,4 +1,9 @@
 module ApplicationHelper
+  # Checks if breadcrumb must be active
+  def active_breadcrumb(active)
+    ' active' if active
+  end
+
   # Converts Rails flash message types into Bootstrap message types.
   def bootstrap_class_for(flash_type)
     case flash_type

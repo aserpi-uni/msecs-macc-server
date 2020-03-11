@@ -1,11 +1,20 @@
-<% provide :title, @admin.email %>
+<% title = @admin.email %>
+<% provide :title, title %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render partial: 'application/breadcrumbs/control_panel' %>
+    <%= render partial: 'application/breadcrumbs/admins', locals: { active: false } %>
+    <%= render partial: 'application/breadcrumbs/resource', locals: {
+        active: true, name: @admin.email, resource: @admin
+    } %>
+  </ol>
+</nav>
 
 <div class="jumbotron align-items-center">
-  <h2><%= @admin.email %></h2>
+  <h2><%= title %></h2>
 
   <% if policy(@admin).update? %>
-    <%= link_to t(:edit), edit_admin_path(@admin) %> |
+    <%= link_to t(:edit), edit_admin_path(@admin) %>
   <% end %>
-
-  <%= link_to t(:back), admins_path %>
 </div>

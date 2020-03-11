@@ -1,9 +1,16 @@
-<% provide :title, t(:new, scope: :admin) %>
+<% title = t :new, scope: :admin %>
+<% provide :title, title %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render partial: 'application/breadcrumbs/control_panel' %>
+    <%= render partial: 'application/breadcrumbs/admins', locals: { active: false } %>
+    <%= render partial: 'application/breadcrumbs/create', locals: { resource: Admin } %>
+  </ol>
+</nav>
 
 <div class="jumbotron align-items-center">
-  <h2><%= t :new, scope: :admin %></h2>
+  <h2><%= title %></h2>
 
   <%= render 'form', admin: @admin, password: false, submit_label: t(:create) %>
-
-  <%= link_to t(:back), admins_path %>
 </div>
