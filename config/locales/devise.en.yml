@@ -19,10 +19,6 @@ en:
     mailer:
       confirmation_instructions:
         subject: "Confirmation instructions"
-      reset_password_instructions:
-        subject: "Reset password instructions"
-      unlock_instructions:
-        subject: "Unlock instructions"
       email_changed:
         body: "We're contacting you to notify you that your email has been changed to %{email}."
         greetings: "Hello there, %{user}!"
@@ -31,6 +27,17 @@ en:
         body: "We're contacting you to notify you that your password has been changed."
         greetings: "Hello there, %{user}!"
         subject: "Password changed"
+      reset_password_instructions:
+        body_ignore: "If you didn't request this, please ignore this email. Your password won't change until you access the link above and create a new one."
+        body_info: "Someone has requested a link to change your password. You can do this through the link below."
+        greetings: "Hello there, %{user}!"
+        link: "Change my password"
+        subject: "Reset password instructions"
+      unlock_instructions:
+        body: "Your account has been locked due to an excessive number of unsuccessful sign in attempts. Click the link below to unlock your account:"
+        greetings: "Hello there, %{user}!"
+        link: "Unlock my account"
+        subject: "Unlock instructions"
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
