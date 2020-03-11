@@ -11,7 +11,14 @@
 </nav>
 
 <div class="jumbotron align-items-center">
-  <h2><%= title %></h2>
+  <h2 class="d-flex align-items-center">
+    <%= title %>
+
+    <%= button_to new_admin_path, method: :get, class: "btn btn-compact btn-outline-primary btn-sm" do %>
+      <span class="material-icons">person_add</span>
+    <% end %>
+
+  </h2>
 
   <div class="list-group list-group-flush">
     <% @admins.each do |admin| %>
@@ -20,8 +27,4 @@
       </div>
     <% end %>
   </div>
-
-  <br>
-
-  <%= link_to t(:new, scope: :admin), new_admin_path %>
 </div>
