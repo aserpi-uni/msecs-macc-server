@@ -21,3 +21,5 @@ import "popper.js"
 import "bootstrap"
 import "daemonite-material"
 import "typeface-roboto"
+
+import "./stylesheets/application.scss";
