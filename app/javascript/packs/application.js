@@ -17,8 +17,6 @@ require("channels");
 // const imagePath = (name) => images(name, true)
 
 import "jquery"
-import "popper.js"
-import "bootstrap"
 import "daemonite-material"
 import "typeface-roboto"
 
