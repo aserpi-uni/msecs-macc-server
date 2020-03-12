@@ -40,11 +40,6 @@ en:
       admin: "admin"
 
   admin:
-    destroy_success: "Admin was successfully destroyed."
-    edit_success: "Admin was successfully edited."
-    editing: "Editing %{admin}"
-    new: "New admin"
-    new_success: "Admin was successfully created."
     settings:
       destroy: "Delete account"
 
@@ -73,10 +68,16 @@ en:
     sure?: "Are you sure?"
 
   resource:
+    editing: "Editing %{resource}"
+    destroy_success: "%{resource} was successfully destroyed"
+    edit_success: "%{resource} was successfully edited."
     failed_validation:
       one: "1 error prohibited this %{resource} from being saved:"
       other: "%{count} errors prohibited this %{resource} from being saved:"
+    new: "New %{resource}"
+    new_success: "%{resource} was successfully created."
 
+  save: "Save"
   settings: "Settings"
   show: "Show"
   sign_out: "Logout"
