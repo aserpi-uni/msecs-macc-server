@@ -20,4 +20,4 @@ import "jquery"
 import "daemonite-material"
 import "typeface-roboto"
 
-import "./stylesheets/application.scss";
+import "stylesheets/application";
