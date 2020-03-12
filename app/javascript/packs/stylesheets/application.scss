@@ -1,3 +1,16 @@
+$primary: (
+  color: #1e88e5,
+  dark: #155fa0,
+  light: #4b9fea
+);
+
+$secondary: (
+  color: #009688,
+  dark: #00695f,
+  light: #33ab9f
+);
+
+
 @import "~daemonite-material/assets/scss/material";
 
 .btn-compact {
