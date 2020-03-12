@@ -5,6 +5,8 @@ class Admin < ApplicationRecord
          :timeoutable,
          :validatable
 
+  has_many :workspaces
+
   # Create a new Admin from +create+ action parameters.
   def self.from_params(params)
     admin = Admin.new
