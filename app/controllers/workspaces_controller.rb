@@ -1,4 +1,6 @@
 class WorkspacesController < ApplicationController
+  before_action :set_workspace, only: %i[show edit update destroy]
+
   # GET /workspaces
   # GET /workspaces.json
   def index
@@ -31,4 +33,11 @@ class WorkspacesController < ApplicationController
   # DELETE /workspaces/1.json
   def destroy
   end
+  
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_workspace
+    @workspace = Workspace.find(params[:id])
   end
+end
