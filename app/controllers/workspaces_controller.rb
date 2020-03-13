@@ -1,8 +1,8 @@
 class WorkspacesController < ApplicationController
   after_action :verify_authorized
-  before_action :set_workspace, only: %i[show edit update destroy]
+  before_action :set_workspace, only: %i[show edit update destroy transfer_supervision]
   before_action(only: %i[index new create]) { authorize Workspace }
-  before_action(only: %i[show edit update destroy]) { authorize @workspace }
+  before_action(only: %i[show edit update destroy transfer_supervision]) { authorize @workspace }
 
   # GET /workspaces
   # GET /workspaces.json

@@ -15,7 +15,7 @@ class WorkspacePolicy < ApplicationPolicy
   end
 
   def create?
-    show?
+    @user.is_a? Admin
   end
 
   def update?
@@ -23,6 +23,10 @@ class WorkspacePolicy < ApplicationPolicy
   end
 
   def destroy?
+    show?
+  end
+
+  def transfer_supervision?
     show?
   end
 
