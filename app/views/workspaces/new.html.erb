@@ -1,2 +1,20 @@
-<h1>Workspaces#new</h1>
-<p>Find me in app/views/workspaces/new.html.erb</p>
+<% title = t :new, scope: :resource, resource: Workspace.model_name.human %>
+
+<% provide :section, 'workspace' %>
+<% provide :title, title %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render partial: 'application/breadcrumbs/control_panel' %>
+    <%= render partial: 'application/breadcrumbs/workspaces', locals: { active: false } %>
+    <%= render partial: 'application/breadcrumbs/create', locals: { resource: Workspace } %>
+  </ol>
+</nav>
+
+<div class="jumbotron align-items-center">
+  <h2>
+    <%= title %>
+  </h2>
+
+  <%= render 'form', workspace: @workspace, password: false, submit_label: t(:create) %>
+</div>
