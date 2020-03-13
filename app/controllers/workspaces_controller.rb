@@ -18,13 +18,12 @@ class WorkspacesController < ApplicationController
   end
 
   # GET /workspaces/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /workspaces
   # POST /workspaces.json
   def create
-    params = workspace_params.permit(%i[billable description name])
+    params = workspace_params
     params[:admin] = current_admin
     @workspace = Workspace.from_params(params)
 
@@ -46,6 +45,19 @@ class WorkspacesController < ApplicationController
   # PATCH/PUT /workspaces/1
   # PATCH/PUT /workspaces/1.json
   def update
+    respond_to do |format|
+      if @workspace.update(workspace_params)
+        format.html do
+          redirect_to @workspace, flash: { success: I18n.t(:edit_success,
+                                                           scope: :resource,
+                                                           resource: Workspace.model_name.human.capitalize) }
+        end
+        format.json { render :show, status: :ok, location: @workspace }
+      else
+        format.html { render :edit }
+        format.json { render json: @workspace.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # DELETE /workspaces/1
@@ -62,6 +74,6 @@ class WorkspacesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def workspace_params
-    params.require(:workspace)
+    params.require(:workspace).permit(%i[billable description name])
   end
 end
