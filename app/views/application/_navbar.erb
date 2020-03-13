@@ -7,12 +7,16 @@
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<%= t :navigation, scope: :aria %>">
     <span class="navbar-toggler-icon"></span>
   </button>
-  
+
   <% if current_admin %>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item<%= ' active' if section == 'admin' %>">
           <%= link_to Admin.model_name.human.pluralize.capitalize, admins_path, class: "nav-link" %>
+        </li>
+
+        <li class="nav-item<%= ' active' if section == 'workspace' %>">
+          <%= link_to Workspace.model_name.human.pluralize.capitalize, workspaces_path, class: "nav-link" %>
         </li>
       </ul>
 
