@@ -93,3 +93,8 @@ en:
   settings: "Settings"
   show: "Show"
   sign_out: "Logout"
+
+  workspace:
+    destroy:
+      disclaimer: "All relative activities will also be deleted."
+      info: "Delete workspace"

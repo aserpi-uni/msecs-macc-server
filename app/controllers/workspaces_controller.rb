@@ -63,6 +63,15 @@ class WorkspacesController < ApplicationController
   # DELETE /workspaces/1
   # DELETE /workspaces/1.json
   def destroy
+    @workspace.destroy
+    respond_to do |format|
+      format.html do
+        redirect_to workspaces_path, flash: { success: I18n.t(:destroy_success,
+                                                              scope: :resource,
+                                                              resource: Workspace.model_name.human.capitalize) }
+      end
+      format.json { head :no_content }
+    end
   end
 
   private
