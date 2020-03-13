@@ -7,7 +7,11 @@
     <div class="list-group-item">
       <div class="row align-items-center justify-content-between mx-1">
           <span>
-            <%= t :destroy, scope: [:admin, :settings] %>
+            <h6>
+              <%= t :info, scope: [resource, :destroy] %>
+            </h6>
+
+            <%= t :disclaimer, scope: [resource, :destroy] %>
           </span>
 
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalIrreversible">

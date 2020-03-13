@@ -45,9 +45,15 @@ en:
       admin: "admin"
       workspace: "workspace"
 
-  admin:
-    settings:
-      destroy: "Delete account"
+  admin_self:
+    destroy:
+      disclaimer: "You will not be able to access the control panel anymore."
+      info: "Delete your account"
+
+  admin_other:
+    destroy:
+      disclaimer: "The admin will not be able to access the control panel anymore."
+      info: "Delete account"
 
   admin_mailer:
     new_admin:
@@ -65,7 +71,7 @@ en:
   control_panel: "Control panel"
   create: "Create"
   danger_zone: "Danger zone"
-  destroy: "Destroy"
+  destroy: "Delete"
   edit: "Edit"
   forbidden: "You are not authorized to perform this action"
 
