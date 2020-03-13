@@ -17,8 +17,6 @@
   <h2><%= title %></h2>
 
   <% if policy(@admin).destroy? && @admin != current_admin %>
-    <%= render 'danger_zone', resource: :admin_other %>
-
-    <%= render partial: 'application/modal_irreversible', locals: { path: @admin } %>
+    <%= render 'danger_zone', path: @admin, resource: :admin_other %>
   <% end %>
 </div>

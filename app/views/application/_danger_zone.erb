@@ -14,10 +14,12 @@
             <%= t :disclaimer, scope: [resource, :destroy] %>
           </span>
 
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalIrreversible">
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalIrreversibleDestroy">
           <%= t :destroy %>
         </button>
       </div>
+
+      <%= render 'modal_irreversible', id: "modalIrreversibleDestroy", path: path %>
     </div>
   </div>
 </div>

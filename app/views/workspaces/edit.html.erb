@@ -21,8 +21,5 @@
   <%= render 'form', workspace: @workspace, password: true, submit_label: t(:save) %>
 
   <div class="mt-4"></div>
-
-  <%= render 'application/danger_zone', resource: :workspace %>
+  <%= render 'application/danger_zone', path: @workspace, resource: :workspace %>
 </div>
-
-<%= render partial: 'application/modal_irreversible', locals: { path: @workspace } %>
