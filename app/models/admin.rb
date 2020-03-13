@@ -4,8 +4,16 @@ class Admin < ApplicationRecord
          :recoverable,
          :timeoutable,
          :validatable
+  before_destroy :check_workspaces
 
   has_many :workspaces
+
+  def check_workspaces
+    return true if workspaces.empty?
+
+    errors.add :base, I18n.t(:failed, scope: %i[admin_other destroy])
+    throw(:abort)
+  end
 
   # Create a new Admin from +create+ action parameters.
   def self.from_params(params)

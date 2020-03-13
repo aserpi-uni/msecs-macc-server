@@ -48,11 +48,13 @@ en:
   admin_self:
     destroy:
       disclaimer: "You will not be able to access the control panel anymore."
+      failed: "You must transfer ownership of all supervised workspaces before deleting your account."
       info: "Delete your account"
 
   admin_other:
     destroy:
       disclaimer: "The admin will not be able to access the control panel anymore."
+      failed: "Admin must transfer ownership of his supervised workspaces."
       info: "Delete account"
 
   admin_mailer:
