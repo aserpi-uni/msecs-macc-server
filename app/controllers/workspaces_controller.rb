@@ -1,10 +1,13 @@
 class WorkspacesController < ApplicationController
+  after_action :verify_authorized
   before_action :set_workspace, only: %i[show edit update destroy]
+  before_action(only: %i[index new create]) { authorize Workspace }
+  before_action(only: %i[show edit update destroy]) { authorize @workspace }
 
   # GET /workspaces
   # GET /workspaces.json
   def index
-    @workspaces = Workspace.all
+    @workspaces = policy_scope(Workspace)
   end
 
   # GET /workspaces/1
