@@ -95,8 +95,15 @@ en:
   settings: "Settings"
   show: "Show"
   sign_out: "Logout"
+  transfer: "Transfer"
 
   workspace:
     destroy:
       disclaimer: "All relative activities will also be deleted."
       info: "Delete workspace"
+    transfer_supervision:
+      disclaimer: "You will not be able to access the workspace anymore."
+      failed: "No admin with the specified email."
+      info: "Transfer supervision to another admin"
+      modal_title: "New supervisor"
+      success: "Workspace supervision was successfully transferred."

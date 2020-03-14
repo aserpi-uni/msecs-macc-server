@@ -22,4 +22,26 @@
       <%= render 'modal_irreversible', id: "modalIrreversibleDestroy", path: path %>
     </div>
   </div>
+
+  <% if resource == :workspace %>
+    <div class="list-group list-group-flush">
+      <div class="list-group-item">
+        <div class="row align-items-center justify-content-between mx-1">
+          <span>
+            <h6>
+              <%= t :info, scope: [resource, :transfer_supervision] %>
+            </h6>
+
+            <%= t :disclaimer, scope: [resource, :transfer_supervision] %>
+          </span>
+
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalTransferOwnership">
+            <%= t :transfer %>
+          </button>
+        </div>
+
+        <%= render 'workspaces/transfer_supervision', workspace: path %>
+      </div>
+    </div>
+  <% end %>
 </div>

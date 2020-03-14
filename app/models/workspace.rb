@@ -12,4 +12,14 @@ class Workspace < ApplicationRecord
 
     workspace
   end
+
+  def transfer_supervision(email)
+    unless (new_admin = Admin.find_by email: email)
+      errors.add :base, I18n.t(:failed, scope: %i[workspace transfer_supervision])
+      return false
+    end
+
+    self.admin = new_admin
+    save
+  end
 end

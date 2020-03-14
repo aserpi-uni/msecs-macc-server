@@ -76,6 +76,22 @@ class WorkspacesController < ApplicationController
     end
   end
 
+  # PATCH/PUT /workspaces/1/transfer_ownership
+  # PATCH/PUT /workspaces/1/transfer_ownership.json
+  def transfer_supervision
+    respond_to do |format|
+      if @workspace.transfer_supervision params.require(:email)
+        format.html do
+          redirect_to workspaces_path, flash: { success: I18n.t(:success, scope: [:workspace, :transfer_supervision]) }
+        end
+        format.json { render workspaces_path, status: :ok }
+      else
+        format.html { render :edit, location: @workspace }
+        format.json { render json: @workspace.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
