@@ -10,7 +10,7 @@
   <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
     <%= render "error_messages", resource: resource %>
 
-    <div class="form-group">
+    <div class="form-group floating-label">
       <%= f.label :email %><br />
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: true %>
     </div>

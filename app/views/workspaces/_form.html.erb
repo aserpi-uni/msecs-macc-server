@@ -1,7 +1,7 @@
 <%= form_with(model: workspace, local: true) do |form| %>
   <%= render partial: 'error_messages', locals: { resource: workspace } %>
 
-  <div class="form-group">
+  <div class="form-group floating-label">
     <%= form.label :name %>
     <%= form.text_field :name, class: "form-control", placeholder: true %>
   </div>
