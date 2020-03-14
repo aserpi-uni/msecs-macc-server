@@ -1,5 +1,5 @@
 <%= form_with(model: admin, local: true) do |form| %>
-  <%= render partial: 'error_messages', locals: { resource: admin } %>
+  <%= render 'error_messages', resource: admin %>
 
   <div class="form-group floating-label">
     <%= form.label :email %>

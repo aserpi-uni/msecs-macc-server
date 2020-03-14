@@ -5,16 +5,16 @@
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb shadow-sm">
-    <%= render partial: 'application/breadcrumbs/control_panel' %>
-    <%= render partial: 'application/breadcrumbs/admins', locals: { active: false } %>
-    <%= render partial: 'application/breadcrumbs/resource', locals: {
-        active: true, name: @admin.email, resource: @admin
-    } %>
+    <%= render 'application/breadcrumbs/control_panel' %>
+    <%= render 'application/breadcrumbs/admins', active: false %>
+    <%= render 'application/breadcrumbs/resource', active: true, name: @admin.email, resource: @admin %>
   </ol>
 </nav>
 
 <div class="jumbotron align-items-center">
-  <h2><%= title %></h2>
+  <h2>
+    <%= title %>
+  </h2>
 
   <% if policy(@admin).destroy? && @admin != current_admin %>
     <%= render 'danger_zone', path: @admin, resource: :admin_other %>

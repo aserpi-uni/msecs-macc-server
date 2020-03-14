@@ -5,11 +5,9 @@
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb shadow-sm">
-    <%= render partial: 'application/breadcrumbs/control_panel' %>
-    <%= render partial: 'application/breadcrumbs/workspaces', locals: { active: false } %>
-    <%= render partial: 'application/breadcrumbs/update', locals: {
-        active: false, name: @workspace.name, resource: @workspace
-    } %>
+    <%= render 'application/breadcrumbs/control_panel' %>
+    <%= render 'application/breadcrumbs/workspaces', active: false %>
+    <%= render 'application/breadcrumbs/update', active: false, name: @workspace.name, resource: @workspace %>
   </ol>
 </nav>
 

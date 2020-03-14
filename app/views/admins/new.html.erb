@@ -5,14 +5,16 @@
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb shadow-sm">
-    <%= render partial: 'application/breadcrumbs/control_panel' %>
-    <%= render partial: 'application/breadcrumbs/admins', locals: { active: false } %>
-    <%= render partial: 'application/breadcrumbs/create', locals: { resource: Admin } %>
+    <%= render 'application/breadcrumbs/control_panel' %>
+    <%= render 'application/breadcrumbs/admins', active: false %>
+    <%= render 'application/breadcrumbs/create', resource: Admin %>
   </ol>
 </nav>
 
 <div class="jumbotron align-items-center">
-  <h2><%= title %></h2>
+  <h2>
+    <%= title %>
+  </h2>
 
   <%= render 'form', admin: @admin, password: false, submit_label: t(:create) %>
 </div>
