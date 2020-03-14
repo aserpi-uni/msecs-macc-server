@@ -53,3 +53,6 @@ end
 # Admin authentication
 gem 'devise'
 gem 'pundit'
+
+# Currencies
+gem 'money-rails'
