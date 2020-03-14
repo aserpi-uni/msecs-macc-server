@@ -1,0 +1,25 @@
+<% title = t :editing, scope: :resource, resource: @workspace.name %>
+
+<% provide :section, 'workspace' %>
+<% provide :title, title %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render partial: 'application/breadcrumbs/control_panel' %>
+    <%= render partial: 'application/breadcrumbs/workspaces', locals: { active: false } %>
+    <%= render partial: 'application/breadcrumbs/update', locals: {
+        active: false, name: @workspace.name, resource: @workspace
+    } %>
+  </ol>
+</nav>
+
+<div class="jumbotron align-items-center">
+  <h2>
+    <%= title %>
+  </h2>
+
+  <%= render 'form', workspace: @workspace, password: true, submit_label: t(:save) %>
+
+  <div class="mt-4"></div>
+  <%= render 'application/danger_zone', path: @workspace, resource: :workspace %>
+</div>

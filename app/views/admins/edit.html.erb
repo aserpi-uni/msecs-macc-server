@@ -1,5 +1,5 @@
 <% provide :section, 'admin' %>
-<% provide :title, t(:editing, scope: :admin, admin: @admin.email) %>
+<% provide :title, t(:settings) %>
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb shadow-sm">
@@ -13,13 +13,11 @@
 
 <div class="jumbotron align-items-center">
   <h2>
-    <%= t :editing, scope: :admin, admin: @admin.email %>
+    <%= t :settings %>
   </h2>
 
-  <%= render 'form', admin: @admin, password: true, submit_label: t(:edit) %>
+  <%= render 'form', admin: @admin, password: true, submit_label: t(:save) %>
 
   <div class="mt-4"></div>
-  <%= render 'danger_zone' %>
+  <%= render 'application/danger_zone', path: @admin, resource: :admin_self %>
 </div>
-
-<%= render partial: 'application/modal_irreversible', locals: { path: @admin } %>

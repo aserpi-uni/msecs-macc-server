@@ -11,4 +11,8 @@ Rails.application.routes.draw do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
   end
+
+  resources :workspaces do
+    patch 'transfer_supervision', on: :member
+  end
 end

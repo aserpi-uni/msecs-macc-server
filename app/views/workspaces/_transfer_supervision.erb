@@ -1,0 +1,28 @@
+<%= form_with(url: transfer_supervision_workspace_path(workspace), method: :patch, local: true) do |form| %>
+  <div class="modal fade" id="modalTransferOwnership" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalIrreversibleTitle">
+            <%= t :modal_title, scope: %i[workspace transfer_supervision] %>
+          </h5>
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <i class="material-icons" aria-hidden="true">close</i>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group">
+            <%= form.label :email %>
+            <%= form.email_field :email, class: "form-control", placeholder: true %>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+            <%= form.submit t(:confirm), class: 'btn btn-danger button-delete mx-2'%>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

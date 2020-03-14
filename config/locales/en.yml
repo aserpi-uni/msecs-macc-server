@@ -36,17 +36,26 @@ en:
         email: "Email"
         password: "Password"
         password_confirmation: "Password confirmation"
+      workspace:
+        admin: "Supervisor"
+        billable: "Billable"
+        description: "Description"
+        name: "Name"
     models:
       admin: "admin"
+      workspace: "workspace"
 
-  admin:
-    destroy_success: "Admin was successfully destroyed."
-    edit_success: "Admin was successfully edited."
-    editing: "Editing %{admin}"
-    new: "New admin"
-    new_success: "Admin was successfully created."
-    settings:
-      destroy: "Delete account"
+  admin_self:
+    destroy:
+      disclaimer: "You will not be able to access the control panel anymore."
+      failed: "You must transfer ownership of all supervised workspaces before deleting your account."
+      info: "Delete your account"
+
+  admin_other:
+    destroy:
+      disclaimer: "The admin will not be able to access the control panel anymore."
+      failed: "Admin must transfer ownership of his supervised workspaces."
+      info: "Delete account"
 
   admin_mailer:
     new_admin:
@@ -64,7 +73,7 @@ en:
   control_panel: "Control panel"
   create: "Create"
   danger_zone: "Danger zone"
-  destroy: "Destroy"
+  destroy: "Delete"
   edit: "Edit"
   forbidden: "You are not authorized to perform this action"
 
@@ -73,10 +82,28 @@ en:
     sure?: "Are you sure?"
 
   resource:
+    editing: "Editing %{resource}"
+    destroy_success: "%{resource} was successfully destroyed"
+    edit_success: "%{resource} was successfully edited."
     failed_validation:
       one: "1 error prohibited this %{resource} from being saved:"
       other: "%{count} errors prohibited this %{resource} from being saved:"
+    new: "New %{resource}"
+    new_success: "%{resource} was successfully created."
 
+  save: "Save"
   settings: "Settings"
   show: "Show"
   sign_out: "Logout"
+  transfer: "Transfer"
+
+  workspace:
+    destroy:
+      disclaimer: "All relative activities will also be deleted."
+      info: "Delete workspace"
+    transfer_supervision:
+      disclaimer: "You will not be able to access the workspace anymore."
+      failed: "No admin with the specified email."
+      info: "Transfer supervision to another admin"
+      modal_title: "New supervisor"
+      success: "Workspace supervision was successfully transferred."

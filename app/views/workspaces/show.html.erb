@@ -1,0 +1,28 @@
+<% title = @workspace.name %>
+
+<% provide :section, 'workspace' %>
+<% provide :title, title %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render partial: 'application/breadcrumbs/control_panel' %>
+    <%= render partial: 'application/breadcrumbs/workspaces', locals: { active: false } %>
+    <%= render partial: 'application/breadcrumbs/resource', locals: {
+        active: true, name: @workspace.name, resource: @workspace
+    } %>
+  </ol>
+</nav>
+
+<div class="jumbotron align-items-center">
+  <h2 class="d-flex align-items-center">
+    <%= title %>
+
+    <%= button_to edit_workspace_path(@workspace), method: :get, class: "btn btn-compact btn-outline-primary btn-sm" do %>
+      <span class="material-icons">edit</span>
+    <% end %>
+  </h2>
+
+  <span>
+    <%= @workspace.description %>
+  </span>
+</div>

@@ -34,7 +34,11 @@ class AdminsController < ApplicationController
 
     respond_to do |format|
       if @admin.save
-        format.html { redirect_to @admin, flash: { success: I18n.t(:new_success, scope: :admin) } }
+        format.html do
+          redirect_to @admin, flash: { success: I18n.t(:new_success,
+                                                       scope: :resource,
+                                                       resource: Admin.model_name.human.capitalize) }
+        end
         format.json { render :show, status: :created, location: @admin }
         AdminMailer.new_admin(@admin).deliver_later
       else
@@ -49,7 +53,11 @@ class AdminsController < ApplicationController
   def update
     respond_to do |format|
       if @admin.update(admin_params.permit(%i[email password password_confirmation]))
-        format.html { redirect_to @admin, flash: { success: I18n.t(:edit_success, scope: :admin) } }
+        format.html do
+          redirect_to @admin, flash: { success: I18n.t(:edit_success,
+                                                       scope: :resource,
+                                                       resource: Admin.model_name.human.capitalize) }
+        end
         format.json { render :show, status: :ok, location: @admin }
       else
         format.html { render :edit }
@@ -61,10 +69,23 @@ class AdminsController < ApplicationController
   # DELETE /admins/1
   # DELETE /admins/1.json
   def destroy
-    @admin.destroy
     respond_to do |format|
-      format.html { redirect_to admins_url, flash: { success: I18n.t(:destroy_success, scope: :admin) } }
-      format.json { head :no_content }
+      if @admin.destroy
+        format.html do
+          redirect_to admins_url, flash: { success: I18n.t(:destroy_success,
+                                                           scope: :resource,
+                                                           resource: Admin.model_name.human.capitalize) }
+        end
+        format.json { head :no_content }
+      else
+        if @admin == current_admin
+          format.html { render :edit }
+        else
+          format.html { render :show }
+          flash.now[:error] = I18n.t(:failed, scope: %i[admin_other destroy])
+        end
+        format.json { render json: @admin.errors, status: :unprocessable_entity }
+      end
     end
   end
 

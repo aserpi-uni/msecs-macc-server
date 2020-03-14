@@ -1,0 +1,36 @@
+<% title = Workspace.model_name.human.capitalize.pluralize %>
+
+<% provide :section, 'workspace' %>
+<% provide :title, title %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render partial: 'application/breadcrumbs/control_panel' %>
+    <%= render partial: 'application/breadcrumbs/workspaces', locals: { active: true } %>
+  </ol>
+</nav>
+
+<div class="jumbotron align-items-center">
+  <h2 class="d-flex align-items-center">
+    <%= title %>
+
+    <%= button_to new_workspace_path, method: :get, class: "btn btn-compact btn-outline-primary btn-sm" do %>
+      <span class="material-icons">group_add</span>
+    <% end %>
+
+  </h2>
+
+  <div class="list-group list-group-flush">
+    <% @workspaces.each do |workspace| %>
+      <div class="list-group-item list-group-item-action">
+        <%= link_to workspace.name, workspace %>
+
+        <br>
+
+        <small>
+          <%= workspace.description %>
+        </small>
+      </div>
+    <% end %>
+  </div>
+</div>
