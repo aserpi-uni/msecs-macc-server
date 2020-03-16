@@ -170,6 +170,9 @@ GEM
       sprockets (>= 3.0.0)
     thor (1.0.1)
     thread_safe (0.3.6)
+    tiddle (1.4.0)
+      activerecord (>= 4.2.0)
+      devise (>= 4.0.0.rc1, < 5)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -212,6 +215,7 @@ DEPENDENCIES
   rails (~> 6.0.2, >= 6.0.2.1)
   spring
   spring-watcher-listen (~> 2.0.0)
+  tiddle
   turbolinks (~> 5)
   tzinfo-data
   wdm (>= 0.1.0)

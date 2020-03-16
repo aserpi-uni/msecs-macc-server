@@ -48,9 +48,10 @@ if Gem.win_platform?
   gem 'wdm', '>= 0.1.0'
 end
 
-# Admin authentication
+# Authentication
 gem 'devise'
 gem 'pundit'
+gem 'tiddle'
 
 # Currencies
 gem 'money-rails'
