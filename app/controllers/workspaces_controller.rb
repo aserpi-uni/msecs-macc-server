@@ -101,6 +101,6 @@ class WorkspacesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def workspace_params
-    params.require(:workspace).permit(%i[billable description name])
+    params.require(:workspace).permit(%i[description name])
   end
 end

@@ -6,7 +6,6 @@ class Workspace < ApplicationRecord
     workspace = Workspace.new
 
     workspace.admin = params[:admin]
-    workspace.billable = params[:billable]
     workspace.description = params[:description]
     workspace.name = params[:name]
 

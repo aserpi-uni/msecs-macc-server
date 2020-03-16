@@ -11,11 +11,5 @@
     <%= form.text_area :description, class: "form-control", placeholder: true %>
   </div>
 
-  <div class="form-group custom-control custom-switch">
-    <%= form.check_box :billable, class: "custom-control-input" %>
-    <span class="custom-control-track"></span>
-    <%= form.label :billable, class: "custom-control-label" %>
-  </div>
-
   <%= form.submit submit_label, class: "btn btn-primary" %>
 <% end %>

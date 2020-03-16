@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_13_105500) do
+ActiveRecord::Schema.define(version: 2020_03_14_185221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 2020_03_13_105500) do
   end
 
   create_table "workspaces", force: :cascade do |t|
-    t.boolean "billable"
     t.string "description"
     t.string "name"
     t.bigint "admin_id", null: false
