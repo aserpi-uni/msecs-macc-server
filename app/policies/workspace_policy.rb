@@ -26,6 +26,10 @@ class WorkspacePolicy < ApplicationPolicy
     show?
   end
 
+  def update_workers?
+    update?
+  end
+
   def destroy?
     show?
   end

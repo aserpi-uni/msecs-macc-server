@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   resources :workspaces do
     member do
       get 'edit_workers'
+      post 'update_workers'
       patch 'transfer_supervision'
+    end
   end
-end
 end

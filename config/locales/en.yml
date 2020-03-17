@@ -114,3 +114,6 @@ en:
       success: "Workspace supervision was successfully transferred."
     workers:
       title: "Workers of %{workspace}"
+    update_workers:
+      failed: "Could not update the list of workers."
+      success: "The list of workers was successfully updated."
