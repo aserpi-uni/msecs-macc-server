@@ -18,6 +18,10 @@
         <li class="nav-item<%= ' active' if section == 'workspace' %>">
           <%= link_to Workspace.model_name.human.pluralize.capitalize, workspaces_path, class: "nav-link" %>
         </li>
+
+        <li class="nav-item<%= ' active' if section == 'worker' %>">
+          <%= link_to Worker.model_name.human.pluralize.capitalize, workers_path, class: "nav-link" %>
+        </li>
       </ul>
 
       <div>
