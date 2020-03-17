@@ -105,6 +105,7 @@ en:
   worker:
     destroy:
       disclaimer: "The worker will not be able to access the app anymore."
+      failed: "Could not destroy worker."
       info: "Delete worker"
 
   workspace:

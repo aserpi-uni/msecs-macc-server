@@ -21,11 +21,13 @@
     <%= Workspace.model_name.human.pluralize.capitalize %> (<%= workspaces.count %>)
   </h4>
 
-  <div class="list-group list-group-flush">
+  <div class="list-group list-group-flush mb-3">
     <% workspaces.each do |workspace| %>
       <div class="list-group-item list-group-item-flush">
         <%= link_to workspace.name, workspace %>
       </div>
     <% end %>
   </div>
+
+  <%= render 'danger_zone', path: @worker, resource: :worker %>
 </div>

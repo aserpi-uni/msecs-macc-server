@@ -1,5 +1,5 @@
 class WorkersController < ApplicationController
-  before_action :set_worker, only: %i[show]
+  before_action :set_worker, only: %i[show destroy]
 
   # GET /workers
   # GET /workers.json
@@ -47,6 +47,20 @@ class WorkersController < ApplicationController
   # DELETE /workers/1
   # DELETE /workers/1.json
   def destroy
+    respond_to do |format|
+      if @worker.destroy
+        format.html do
+          redirect_to workers_url, flash: { success: I18n.t(:destroy_success,
+                                                            scope: :resource,
+                                                            resource: Worker.model_name.human.capitalize) }
+        end
+        format.json { head :no_content }
+      else
+        format.html { render :show }
+        flash.now[:error] = I18n.t(:failed, scope: %i[worker destroy])
+        format.json { render json: @worker.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private
