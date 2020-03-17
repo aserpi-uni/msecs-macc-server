@@ -14,10 +14,6 @@ class WorkersController < ApplicationController
     @worker = Worker.new
   end
 
-  # GET /workers/1/edit
-  def edit
-  end
-
   # POST /workers
   # POST /workers.json
   def create
