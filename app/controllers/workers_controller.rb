@@ -1,5 +1,12 @@
 class WorkersController < ApplicationController
-  before_action :set_worker, only: %i[show destroy]
+  after_action :verify_authorized
+  before_action :set_worker, only: %i[show update destroy]
+  before_action only: %i[index show_self new create destroy] do
+    authorize Worker
+  end
+  before_action only: %i[show update] do
+    authorize @worker
+  end
 
   # GET /workers
   # GET /workers.json
