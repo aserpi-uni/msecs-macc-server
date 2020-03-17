@@ -1,2 +1,31 @@
-<h1>Workers#show</h1>
-<p>Find me in app/views/workers/show.html.erb</p>
+<% title = @worker.email %>
+<% workspaces = policy_scope(@worker.workspaces) %>
+
+<% provide :section, 'worker' %>
+<% provide :title, title %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render 'application/breadcrumbs/control_panel' %>
+    <%= render 'application/breadcrumbs/workers', active: false %>
+    <%= render 'application/breadcrumbs/resource', active: true, name: @worker.email, resource: @worker %>
+  </ol>
+</nav>
+
+<div class="jumbotron align-items-center">
+  <h2>
+    <%= title %>
+  </h2>
+
+  <h4>
+    <%= Workspace.model_name.human.pluralize.capitalize %> (<%= workspaces.count %>)
+  </h4>
+
+  <div class="list-group list-group-flush">
+    <% workspaces.each do |workspace| %>
+      <div class="list-group-item list-group-item-flush">
+        <%= link_to workspace.name, workspace %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -102,6 +102,11 @@ en:
   sign_out: "Logout"
   transfer: "Transfer"
 
+  worker:
+    destroy:
+      disclaimer: "The worker will not be able to access the app anymore."
+      info: "Delete worker"
+
   workspace:
     destroy:
       disclaimer: "All relative activities will also be deleted."

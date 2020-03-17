@@ -1,12 +1,13 @@
 class WorkersController < ApplicationController
+  before_action :set_worker, only: %i[show]
+
   # GET /workers
   # GET /workers.json
   def index
   end
 
   # GET /workers/1.json
-  def show
-  end
+  def show; end
 
   # GET /workers/new
   def new
@@ -49,6 +50,11 @@ class WorkersController < ApplicationController
   end
 
   private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_worker
+    @worker = Worker.find(params[:id])
+  end
 
   # Only allow a list of trusted parameters through.
   def worker_params
