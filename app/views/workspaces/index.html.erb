@@ -22,14 +22,20 @@
 
   <div class="list-group list-group-flush">
     <% @workspaces.each do |workspace| %>
-      <div class="list-group-item list-group-item-action">
-        <%= link_to workspace.name, workspace %>
+      <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+        <span>
+          <%= link_to workspace.name, workspace %>
 
-        <br>
+          <br>
 
-        <small>
-          <%= workspace.description %>
-        </small>
+          <small>
+            <%= workspace.description %>
+          </small>
+        </span>
+
+        <span class="badge badge-primary badge-pill">
+          <%= workspace.workers.count %>
+        </span>
       </div>
     <% end %>
   </div>

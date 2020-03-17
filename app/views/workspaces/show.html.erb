@@ -25,4 +25,20 @@
   <span>
     <%= @workspace.description %>
   </span>
+
+  <h4 class="d-flex align-items-center mt-3">
+    <%= Worker.model_name.human.pluralize.capitalize %> (<%= @workspace.workers.count %>)
+
+    <%= button_to edit_workers_workspace_path(@workspace), method: :get, class: "btn btn-compact btn-outline-primary btn-sm" do %>
+      <span class="material-icons">group_add</span>
+    <% end %>
+  </h4>
+
+  <div class="list-group list-group-flush">
+    <% @workspace.workers.each do |worker| %>
+      <div class="list-group-item list-group-item-flush">
+        <%= link_to worker.email, worker %>
+      </div>
+    <% end %>
+  </div>
 </div>
