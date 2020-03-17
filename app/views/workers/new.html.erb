@@ -1,2 +1,20 @@
-<h1>Workers#new</h1>
-<p>Find me in app/views/workers/new.html.erb</p>
+<% title = t :new, scope: :resource, resource: Worker.model_name.human %>
+
+<% provide :section, 'worker' %>
+<% provide :title, title %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render 'application/breadcrumbs/control_panel' %>
+    <%= render 'application/breadcrumbs/workers', active: false %>
+    <%= render 'application/breadcrumbs/create', resource: Worker %>
+  </ol>
+</nav>
+
+<div class="jumbotron align-items-center">
+  <h2>
+    <%= title %>
+  </h2>
+
+  <%= render 'form', worker: @worker, password: false, submit_label: t(:create) %>
+</div>

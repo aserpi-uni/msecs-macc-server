@@ -36,6 +36,10 @@ en:
         email: "Email"
         password: "Password"
         password_confirmation: "Password confirmation"
+      worker:
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password confirmation"
       workspace:
         admin: "Supervisor"
         billable: "Billable"
@@ -43,6 +47,7 @@ en:
         name: "Name"
     models:
       admin: "admin"
+      worker: "worker"
       workspace: "workspace"
 
   admin_self:

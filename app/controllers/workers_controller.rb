@@ -10,6 +10,7 @@ class WorkersController < ApplicationController
 
   # GET /workers/new
   def new
+    @worker = Worker.new
   end
 
   # GET /workers/1/edit
@@ -19,6 +20,22 @@ class WorkersController < ApplicationController
   # POST /workers
   # POST /workers.json
   def create
+    @worker = Worker.from_params(worker_params.permit(:email))
+
+    respond_to do |format|
+      if @worker.save
+        format.html do
+          redirect_to @worker, flash: { success: I18n.t(:new_success,
+                                                        scope: :resource,
+                                                        resource: Worker.model_name.human.capitalize) }
+        end
+        format.json { render :show, status: :created, location: @worker }
+        AdminMailer.new_admin(@worker).deliver_later # TODO: unify mailers
+      else
+        format.html { render :new }
+        format.json { render json: @worker.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /workers/1
@@ -29,5 +46,12 @@ class WorkersController < ApplicationController
   # DELETE /workers/1
   # DELETE /workers/1.json
   def destroy
+  end
+
+  private
+
+  # Only allow a list of trusted parameters through.
+  def worker_params
+    params.require(:worker)
   end
 end
