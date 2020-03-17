@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   resources :admins
 
   devise_scope :admin do
-    authenticated :user do
-      root 'home#index', as: :authenticated_root
+    authenticated :admin do
+      root 'control_panel#index', as: :authenticated_root
     end
 
     unauthenticated do
