@@ -112,3 +112,5 @@ en:
       info: "Transfer supervision to another admin"
       modal_title: "New supervisor"
       success: "Workspace supervision was successfully transferred."
+    workers:
+      title: "Workers of %{workspace}"

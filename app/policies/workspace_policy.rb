@@ -14,6 +14,10 @@ class WorkspacePolicy < ApplicationPolicy
     @workspace.admin == @user
   end
 
+  def edit_workers?
+    update_workers?
+  end
+
   def create?
     @user.is_a? Admin
   end
