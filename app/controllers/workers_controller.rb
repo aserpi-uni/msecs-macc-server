@@ -11,6 +11,8 @@ class WorkersController < ApplicationController
   # GET /workers
   # GET /workers.json
   def index
+    # TODO: paginate
+    @workers = Worker.all
   end
 
   # GET /workers/1.json
