@@ -9,10 +9,10 @@ class ApplicationController < ActionController::Base
   def not_authorized
     flash.alert = I18n.t :forbidden
     response.headers['Status-Code'] = '403'
-    redirect_to admin_signed_in? ? authenticated_root_path : unauthenticated_root_path
+    redirect_to(root_url)
   end
 
   def pundit_user
-    current_admin
+    current_admin || current_worker
   end
 end

@@ -1,6 +1,4 @@
 class WorkspacePolicy < ApplicationPolicy
-  attr_reader :admin, :user
-
   def initialize(user, workspace)
     @user = user
     @workspace = workspace
@@ -11,7 +9,7 @@ class WorkspacePolicy < ApplicationPolicy
   end
 
   def show?
-    @workspace.admin == @user
+    (@user.is_a?(Admin) && @workspace.admin == @user) || (@user.is_a?(Worker) && @workspace.workers.include?(@user))
   end
 
   def edit_workers?
@@ -23,7 +21,7 @@ class WorkspacePolicy < ApplicationPolicy
   end
 
   def update?
-    show?
+    @workspace.admin == @user
   end
 
   def update_workers?
@@ -31,11 +29,11 @@ class WorkspacePolicy < ApplicationPolicy
   end
 
   def destroy?
-    show?
+    @workspace.admin == @user
   end
 
   def transfer_supervision?
-    show?
+    update?
   end
 
   class Scope < Scope

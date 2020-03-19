@@ -16,6 +16,10 @@ class WorkersController < ApplicationController
   # GET /workers/1.json
   def show; end
 
+  def show_self
+    redirect_to current_worker
+  end
+
   # GET /workers/new
   def new
     @worker = Worker.new

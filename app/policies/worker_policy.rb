@@ -1,6 +1,4 @@
 class WorkerPolicy < ApplicationPolicy
-  attr_reader :worker, :user
-
   def initialize(user, worker)
     @logged_user = user
     @worker = worker
@@ -12,6 +10,10 @@ class WorkerPolicy < ApplicationPolicy
 
   def show?
     @logged_user.is_a?(Admin) || @logged_user == @worker
+  end
+
+  def show_self?
+    @logged_user.is_a? Worker
   end
 
   def create?

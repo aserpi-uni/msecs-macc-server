@@ -6,11 +6,20 @@ Rails.application.routes.draw do
 
   devise_scope :admin do
     authenticated :admin do
-      root 'control_panel#index', as: :authenticated_root
+      root 'control_panel#index', as: :admins_root
+    end
+  end
+
+  devise_scope :worker do
+    authenticated :worker do
+      root to: 'workers#show_self', as: :workers_root
     end
 
-    unauthenticated do
-      root 'devise/sessions#new', as: :unauthenticated_root
+    unauthenticated :worker do
+      devise_scope :admin do
+        # Authenticated admins already matched: no unauthenticated :admin
+        root 'devise/sessions#new'
+      end
     end
   end
 

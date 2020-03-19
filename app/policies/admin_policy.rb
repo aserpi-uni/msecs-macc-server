@@ -1,6 +1,4 @@
 class AdminPolicy < ApplicationPolicy
-  attr_reader :admin, :user
-
   def initialize(user, admin)
     @logged_user = user
     @admin = admin
