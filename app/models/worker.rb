@@ -1,6 +1,7 @@
 class Worker < ApplicationRecord
-  devise :database_authenticatable, :lockable, :recoverable, :validatable
+  devise :database_authenticatable, :lockable, :recoverable, :token_authenticatable, :validatable
 
+  has_many :authentication_tokens, class_name: WorkerAuthenticationToken.name, foreign_key: :user_id
   has_and_belongs_to_many :workspaces
 
   monetize :bill_rate_cents, with_model_currency: :currency

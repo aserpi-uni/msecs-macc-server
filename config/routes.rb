@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :workers
   devise_for :admins
-  resources :workers
+  devise_for :workers, controllers: { sessions: 'workers/sessions' }
+
   resources :admins
+  resources :workers
 
   devise_scope :admin do
     authenticated :admin do
