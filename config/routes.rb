@@ -31,4 +31,6 @@ Rails.application.routes.draw do
       patch 'transfer_supervision'
     end
   end
+
+  get 'google_oauth/id', to: 'google_sign_in#id'
 end
