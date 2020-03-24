@@ -50,6 +50,7 @@ end
 
 # Authentication
 gem 'devise'
+gem 'google-id-token'
 gem 'pundit'
 gem 'tiddle'
 
