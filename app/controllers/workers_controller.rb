@@ -51,6 +51,21 @@ class WorkersController < ApplicationController
   # PATCH/PUT /workers/1
   # PATCH/PUT /workers/1.json
   def update
+    respond_to do |format|
+      params = worker_params.permit(%i[bill_rate_cents currency email password password_confirmation])
+
+      if @worker.update(params)
+        format.html do
+          redirect_to @worker, flash: { success: I18n.t(:edit_success,
+                                                       scope: :resource,
+                                                       resource: Admin.model_name.human.capitalize) }
+        end
+        format.json { render :show, status: :ok, location: @worker }
+      else
+        format.html { render :edit }
+        format.json { render json: @worker.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # DELETE /workers/1
