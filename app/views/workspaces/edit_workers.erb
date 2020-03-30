@@ -1,0 +1,44 @@
+<% title = t :title, scope: [:workspace, :workers], workspace: @workspace.name %>
+
+<% provide :section, 'workspace' %>
+<% provide :title, title %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render 'application/breadcrumbs/control_panel' %>
+    <%= render 'application/breadcrumbs/workspaces', active: false %>
+    <%= render 'application/breadcrumbs/update', active: false, name: @workspace.name, resource: @workspace %>
+    <%= render 'update_workers_breadcrumb', resource: @workspace %>
+  </ol>
+</nav>
+
+<div class="jumbotron align-items-center">
+  <h2>
+    <%= title %>
+  </h2>
+
+  <!-- TODO: improve performance. -->
+  <!-- At the moment a query per worker is performed -->
+  <%= form_with(url: update_workers_workspace_path(@workspace), method: :post, local: true) do |form| %>
+    <div class="list-group list-group-flush">
+      <% Worker.all.each do |worker| %>
+        <div class="list-group-item">
+          <div class="custom-control custom-switch">
+            <%= form.check_box "worker_#{worker.id}",
+                               name: "workers[#{worker.id}]",
+                               checked: @workspace.workers.exists?(worker.id),
+                               class: "custom-control-input" %>
+
+            <span class="custom-control-track"></span>
+
+            <%= form.label "worker_#{worker.id}", class: "custom-control-label" do %>
+              <%= link_to worker.email, worker %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <%= form.submit t(:save), class: "btn btn-primary mt-3" %>
+  <% end %>
+</div>

@@ -1,3 +1,5 @@
-<li class="breadcrumb-item">
-  <%= link_to t(:control_panel), authenticated_root_path %>
-</li>
+<% if current_admin %>
+  <li class="breadcrumb-item">
+    <%= link_to t(:control_panel), root_path %>
+  </li>
+<% end %>

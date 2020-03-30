@@ -1,0 +1,30 @@
+<% title = Worker.model_name.human.capitalize.pluralize %>
+
+<% provide :section, 'worker' %>
+<% provide :title, title %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render 'application/breadcrumbs/control_panel' %>
+    <%= render 'application/breadcrumbs/admins', active: true %>
+  </ol>
+</nav>
+
+<div class="jumbotron align-items-center">
+  <h2 class="d-flex align-items-center">
+    <%= title %>
+
+    <%= button_to new_worker_path, method: :get, class: "btn btn-compact btn-outline-primary btn-sm" do %>
+      <span class="material-icons">person_add</span>
+    <% end %>
+
+  </h2>
+
+  <div class="list-group list-group-flush">
+    <% @workers.each do |worker| %>
+      <div class="list-group-item list-group-item-action">
+        <%= link_to worker.email, worker %>
+      </div>
+    <% end %>
+  </div>
+</div>

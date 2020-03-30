@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include Pundit
+  protect_from_forgery unless: -> { request.format.json? }
 
   rescue_from Pundit::NotAuthorizedError, with: :not_authorized
 
@@ -8,11 +9,13 @@ class ApplicationController < ActionController::Base
   # Redirects the user after a _Pundit_ nay.
   def not_authorized
     flash.alert = I18n.t :forbidden
-    response.headers['Status-Code'] = '403'
-    redirect_to admin_signed_in? ? authenticated_root_path : unauthenticated_root_path
+
+    return head :forbidden if params['format'] == 'json'
+
+    redirect_to root_url
   end
 
   def pundit_user
-    current_admin
+    current_admin || current_worker
   end
 end
