@@ -85,6 +85,11 @@ en:
       disclaimer: "All connected projects and activities will also be destroyed."
       failed: "Could not destroy the client."
       info: "Delete client"
+    update_workspaces:
+      failed: "Could not update the list of workspaces."
+      success: "The list of workspaces was successfully updated."
+    workspaces:
+      title: "Workspaces of %{client}"
 
   confirm: "Confirm"
   control_panel: "Control panel"

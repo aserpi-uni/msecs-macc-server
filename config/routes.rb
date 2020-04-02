@@ -24,7 +24,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :clients
+  resources :clients do
+    member do
+      get 'edit_workspaces'
+      post 'update_workspaces'
+    end
+  end
 
   resources :workspaces do
     member do

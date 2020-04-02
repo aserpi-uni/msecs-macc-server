@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: %i[show edit update destroy]
+  before_action :set_client, only: %i[show edit edit_workspaces update update_workspaces destroy]
 
   # GET /clients
   # GET /clients.json
@@ -18,6 +18,9 @@ class ClientsController < ApplicationController
 
   # GET /clients/1/edit
   def edit; end
+
+  # GET /clients/1/edit_workspaces
+  def edit_workspaces; end
 
   # POST /clients
   # POST /clients.json
@@ -52,6 +55,30 @@ class ClientsController < ApplicationController
         format.json { render :show, status: :ok, location: @client }
       else
         format.html { render :edit }
+        format.json { render json: @client.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # POST /clients/1/update_workspaces
+  # POST /clients/1/update_workspaces.json
+  def update_workspaces
+    workspaces_params = params.require(:workspaces).select { |_, v| v == '1' }.permit!
+
+    # Only supervised workspaces can be added/removed
+    old_unsupervised_workspaces = @client.workspaces.where.not admin: current_admin
+    submitted_workspaces = Workspace.find(workspaces_params.to_h.map { |k, _| k.to_i })
+    @client.workspaces = old_unsupervised_workspaces + submitted_workspaces
+
+    respond_to do |format|
+      if @client.save
+        format.html do
+          redirect_to @client, flash: { success: I18n.t(:success, scope: %i[client update_workspaces]) }
+        end
+        format.json { render :show, status: :ok, location: @client }
+      else
+        format.html { render :edit_workers }
+        flash.now[:error] = I18n.t(:failed, scope: %i[client update_workspaces])
         format.json { render json: @client.errors, status: :unprocessable_entity }
       end
     end
