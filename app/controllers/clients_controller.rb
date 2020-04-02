@@ -1,10 +1,13 @@
 class ClientsController < ApplicationController
+  after_action :verify_authorized
   before_action :set_client, only: %i[show edit edit_workspaces update update_workspaces destroy]
+  before_action(only: %i[index new edit edit_workspaces create update update update_workspaces destroy]) { authorize Client }
+  before_action(only: :show) { authorize @client }
 
   # GET /clients
   # GET /clients.json
   def index
-    @clients = Client.all
+    @clients = policy_scope(Client)
   end
 
   # GET /clients/1
