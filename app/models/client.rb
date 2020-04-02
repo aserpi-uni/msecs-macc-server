@@ -1,4 +1,6 @@
 class Client < ApplicationRecord
+  has_and_belongs_to_many :workspaces
+  has_many :workers, -> { distinct }, through: :workspaces
 
   validates :name, presence: true, uniqueness: true
 

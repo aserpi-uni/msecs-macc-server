@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_01_152849) do
+ActiveRecord::Schema.define(version: 2020_04_02_085748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,13 @@ ActiveRecord::Schema.define(version: 2020_04_01_152849) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_clients_on_name", unique: true
+  end
+
+  create_table "clients_workspaces", id: false, force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.bigint "workspace_id", null: false
+    t.index ["client_id", "workspace_id"], name: "index_clients_workspaces_on_client_id_and_workspace_id"
+    t.index ["workspace_id", "client_id"], name: "index_clients_workspaces_on_workspace_id_and_client_id"
   end
 
   create_table "worker_authentication_tokens", force: :cascade do |t|
