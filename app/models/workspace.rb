@@ -1,5 +1,6 @@
 class Workspace < ApplicationRecord
   belongs_to :admin
+  has_and_belongs_to_many :clients
   has_and_belongs_to_many :workers
 
   # Create a new Workspace from +create+ action parameters.

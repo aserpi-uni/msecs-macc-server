@@ -36,6 +36,10 @@ en:
         email: "Email"
         password: "Password"
         password_confirmation: "Password confirmation"
+      client:
+        color: "Color"
+        description: "Description"
+        name: "Name"
       worker:
         email: "Email"
         password: "Password"
@@ -47,6 +51,7 @@ en:
         name: "Name"
     models:
       admin: "admin"
+      client: "client"
       worker: "worker"
       workspace: "workspace"
 
@@ -74,6 +79,18 @@ en:
 
   back: "Back"
   cancel: "Cancel"
+
+  client:
+    destroy:
+      disclaimer: "All connected projects and activities will also be destroyed."
+      failed: "Could not destroy the client."
+      info: "Delete client"
+    update_workspaces:
+      failed: "Could not update the list of workspaces."
+      success: "The list of workspaces was successfully updated."
+    workspaces:
+      title: "Workspaces of %{client}"
+
   confirm: "Confirm"
   control_panel: "Control panel"
   create: "Create"
@@ -109,6 +126,11 @@ en:
       info: "Delete worker"
 
   workspace:
+    clients:
+      title: "Clients of %{workspace}"
+    update_clients:
+      failed: "Could not update the list of clients."
+      success: "The list of clients was successfully updated."
     destroy:
       disclaimer: "All relative activities will also be deleted."
       info: "Delete workspace"

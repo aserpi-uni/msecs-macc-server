@@ -1,0 +1,48 @@
+<% title = t :title, scope: [:client, :workspaces], client: @client.name %>
+
+<% provide :section, 'client' %>
+<% provide :title, title %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render 'application/breadcrumbs/control_panel' %>
+    <%= render 'application/breadcrumbs/clients', active: false %>
+    <%= render 'application/breadcrumbs/update', active: false, name: @client.name, resource: @client %>
+    <%= render 'update_workspaces_breadcrumb', resource: @client %>
+  </ol>
+</nav>
+
+<div class="jumbotron align-items-center">
+  <h2>
+    <%= title %>
+  </h2>
+
+  <!-- TODO: improve performance. -->
+  <%= form_with(url: update_workspaces_client_path(@client), method: :post, local: true) do |form| %>
+    <div class="list-group list-group-flush">
+      <% Workspace.all.each do |workspace| %>
+        <div class="list-group-item">
+          <div class="custom-control custom-switch">
+            <%= form.check_box "workspace_#{workspace.id}",
+                               name: "workspaces[#{workspace.id}]",
+                               checked: @client.workspaces.exists?(workspace.id),
+                               class: "custom-control-input",
+                               disabled: workspace.admin != current_admin %>
+
+            <span class="custom-control-track"></span>
+
+            <%= form.label "workspace_#{workspace.id}", class: "custom-control-label" do %>
+              <% if workspace.admin == current_admin %>
+                <%= link_to workspace.name, workspace %>
+              <% else %>
+                <%= workspace.name %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <%= form.submit t(:save), class: "btn btn-primary mt-3" %>
+  <% end %>
+</div>

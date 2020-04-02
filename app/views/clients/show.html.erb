@@ -1,0 +1,48 @@
+<% title = @client.name %>
+
+<% provide :section, 'client' %>
+<% provide :title, title %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render partial: 'application/breadcrumbs/control_panel' %>
+    <%= render partial: 'application/breadcrumbs/clients', locals: { active: false } %>
+    <%= render partial: 'application/breadcrumbs/resource', locals: {
+        active: true, name: @client.name, resource: @client
+    } %>
+  </ol>
+</nav>
+
+<div class="jumbotron align-items-center">
+  <h2 class="d-flex align-items-center" style="color: <%= color_helper(@client.color) %>">
+    <%= title %>
+
+    <%= button_to edit_client_path(@client), method: :get, class: "btn btn-compact btn-outline-primary btn-sm" do %>
+      <span class="material-icons">edit</span>
+    <% end %>
+  </h2>
+
+  <span>
+    <%= @client.description %>
+  </span>
+
+  <h4 class="d-flex align-items-center mt-3">
+    <%= Workspace.model_name.human.pluralize.capitalize %> (<%= @client.workspaces.count %>)
+
+    <%= button_to edit_workspaces_client_path(@client), method: :get, class: "btn btn-compact btn-outline-primary btn-sm" do %>
+      <span class="material-icons">group_add</span>
+    <% end %>
+  </h4>
+
+  <div class="list-group list-group-flush">
+    <% @client.workspaces.each do |workspace| %>
+      <div class="list-group-item list-group-item-flush">
+        <% if workspace.admin == current_admin %>
+          <%= link_to workspace.name, workspace %>
+        <% else %>
+          <%= workspace.name %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -19,4 +19,8 @@ module ApplicationHelper
       flash_type.to_s
     end
   end
+
+  def color_helper(color)
+    color ? "##{color.to_s(16).rjust(6, '0')}" : nil
+  end
 end

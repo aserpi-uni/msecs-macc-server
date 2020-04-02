@@ -1,0 +1,20 @@
+<% title = t :new, scope: :resource, resource: Client.model_name.human %>
+
+<% provide :section, 'client' %>
+<% provide :title, title %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render partial: 'application/breadcrumbs/control_panel' %>
+    <%= render partial: 'application/breadcrumbs/clients', locals: { active: false } %>
+    <%= render partial: 'application/breadcrumbs/create', locals: { resource: Client } %>
+  </ol>
+</nav>
+
+<div class="jumbotron align-items-center">
+  <h2>
+    <%= title %>
+  </h2>
+
+  <%= render 'form', client: @client, submit_label: t(:create) %>
+</div>

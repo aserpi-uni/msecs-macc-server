@@ -22,3 +22,7 @@ require("channels");
 // const imagePath = (name) => images(name, true)
 
 $('.floating-label .custom-select, .floating-label .form-control').floatinglabel();
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+});
