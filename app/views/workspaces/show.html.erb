@@ -41,4 +41,20 @@
       </div>
     <% end %>
   </div>
+
+  <h4 class="d-flex align-items-center mt-3">
+    <%= Client.model_name.human.pluralize.capitalize %> (<%= @workspace.clients.count %>)
+
+    <%= button_to edit_clients_workspace_path(@workspace), method: :get, class: "btn btn-compact btn-outline-primary btn-sm" do %>
+      <span class="material-icons">add_circle_outline</span>
+    <% end %>
+  </h4>
+
+  <div class="list-group list-group-flush">
+    <% @workspace.clients.each do |client| %>
+      <div class="list-group-item list-group-item-flush">
+        <%= link_to client.name, client, style: "color: #{color_helper(client.color)}" %>
+      </div>
+    <% end %>
+  </div>
 </div>

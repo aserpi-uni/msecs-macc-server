@@ -25,4 +25,24 @@
   <span>
     <%= @client.description %>
   </span>
+
+  <h4 class="d-flex align-items-center mt-3">
+    <%= Workspace.model_name.human.pluralize.capitalize %> (<%= @client.workspaces.count %>)
+
+    <%= button_to edit_workspaces_client_path(@client), method: :get, class: "btn btn-compact btn-outline-primary btn-sm" do %>
+      <span class="material-icons">group_add</span>
+    <% end %>
+  </h4>
+
+  <div class="list-group list-group-flush">
+    <% @client.workspaces.each do |workspace| %>
+      <div class="list-group-item list-group-item-flush">
+        <% if workspace.admin == current_admin %>
+          <%= link_to workspace.name, workspace %>
+        <% else %>
+          <%= workspace.name %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>

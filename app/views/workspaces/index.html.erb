@@ -33,8 +33,14 @@
           </small>
         </span>
 
-        <span class="badge badge-primary badge-pill">
-          <%= workspace.workers.count %>
+        <span>
+          <span class="badge badge-primary badge-pill">
+            <%= workspace.clients.count %>
+          </span>
+
+          <span class="badge badge-primary badge-pill">
+            <%= workspace.workers.count %>
+          </span>
         </span>
       </div>
     <% end %>
