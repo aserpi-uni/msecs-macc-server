@@ -1,0 +1,38 @@
+<% title = Client.model_name.human.capitalize.pluralize %>
+
+<% provide :section, 'client' %>
+<% provide :title, title %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render partial: 'application/breadcrumbs/control_panel' %>
+    <%= render partial: 'application/breadcrumbs/clients', locals: { active: true } %>
+  </ol>
+</nav>
+
+<div class="jumbotron align-items-center">
+  <h2 class="d-flex align-items-center">
+    <%= title %>
+
+    <%= button_to new_client_path, method: :get, class: "btn btn-compact btn-outline-primary btn-sm" do %>
+      <span class="material-icons">add_circle_outline</span>
+    <% end %>
+
+  </h2>
+
+  <div class="list-group list-group-flush">
+    <% @clients.each do |client| %>
+      <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+        <span>
+          <%= link_to client.name, client, style: "color: #{color_helper(client.color)}" %>
+
+          <br>
+
+          <small>
+            <%= client.description %>
+          </small>
+        </span>
+      </div>
+    <% end %>
+  </div>
+</div>
