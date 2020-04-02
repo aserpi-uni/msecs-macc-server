@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="/">
-    KeepTime
+    KeepTime <!-- GNU Terry Pratchett -->
   </a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -15,13 +15,18 @@
           <%= link_to Admin.model_name.human.pluralize.capitalize, admins_path, class: "nav-link" %>
         </li>
 
-        <li class="nav-item<%= ' active' if section == 'workspace' %>">
-          <%= link_to Workspace.model_name.human.pluralize.capitalize, workspaces_path, class: "nav-link" %>
+        <li class="nav-item<%= ' active' if section == 'client' %>">
+          <%= link_to Client.model_name.human.pluralize.capitalize, clients_path, class: "nav-link" %>
         </li>
 
         <li class="nav-item<%= ' active' if section == 'worker' %>">
           <%= link_to Worker.model_name.human.pluralize.capitalize, workers_path, class: "nav-link" %>
         </li>
+
+        <li class="nav-item<%= ' active' if section == 'workspace' %>">
+          <%= link_to Workspace.model_name.human.pluralize.capitalize, workspaces_path, class: "nav-link" %>
+        </li>
+
       </ul>
 
       <div>
