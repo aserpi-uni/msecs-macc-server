@@ -12,6 +12,10 @@ class WorkspacePolicy < ApplicationPolicy
     (@user.is_a?(Admin) && @workspace.admin == @user) || (@user.is_a?(Worker) && @workspace.workers.include?(@user))
   end
 
+  def edit_clients?
+    update_clients?
+  end
+
   def edit_workers?
     update_workers?
   end
@@ -22,6 +26,10 @@ class WorkspacePolicy < ApplicationPolicy
 
   def update?
     @workspace.admin == @user
+  end
+
+  def update_clients?
+    update?
   end
 
   def update_workers?

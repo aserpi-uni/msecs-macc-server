@@ -1,8 +1,8 @@
 class WorkspacesController < ApplicationController
   after_action :verify_authorized
-  before_action :set_workspace, only: %i[show edit edit_workers update update_workers destroy transfer_supervision]
+  before_action :set_workspace, only: %i[show edit edit_clients edit_workers update update_clients update_workers destroy transfer_supervision]
   before_action(only: %i[index new create]) { authorize Workspace }
-  before_action(only: %i[show edit edit_workers update update_workers destroy transfer_supervision]) { authorize @workspace }
+  before_action(only: %i[show edit edit_clients edit_workers update update_clients update_workers destroy transfer_supervision]) { authorize @workspace }
 
   # GET /workspaces
   # GET /workspaces.json
@@ -21,6 +21,9 @@ class WorkspacesController < ApplicationController
 
   # GET /workspaces/1/edit
   def edit; end
+
+  # GET /workspaces/1/edit_clients
+  def edit_clients; end
 
   # GET /workspaces/new
   def edit_workers; end
@@ -60,6 +63,26 @@ class WorkspacesController < ApplicationController
         format.json { render :show, status: :ok, location: @workspace }
       else
         format.html { render :edit }
+        format.json { render json: @workspace.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # POST /workspaces/1/update_clients
+  # POST /workspaces/1/update_clients.json
+  def update_clients
+    clients_params = params.require(:clients).select { |_, v| v == '1' }.permit!
+    @workspace.client_ids = clients_params.to_h.map { |k, _| k.to_i }
+
+    respond_to do |format|
+      if @workspace.save
+        format.html do
+          redirect_to @workspace, flash: { success: I18n.t(:success, scope: %i[workspace update_clients]) }
+        end
+        format.json { render :show, status: :ok, location: @workspace }
+      else
+        format.html { render :edit_workers }
+        flash.now[:error] = I18n.t(:failed, scope: %i[workspace update_clients])
         format.json { render json: @workspace.errors, status: :unprocessable_entity }
       end
     end
