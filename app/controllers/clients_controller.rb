@@ -60,6 +60,15 @@ class ClientsController < ApplicationController
   # DELETE /clients/1
   # DELETE /clients/1.json
   def destroy
+    @client.destroy
+    respond_to do |format|
+      format.html do
+        redirect_to clients_path, flash: { success: I18n.t(:destroy_success,
+                                                           scope: :resource,
+                                                           resource: Client.model_name.human.capitalize) }
+      end
+      format.json { head :no_content }
+    end
   end
 
   private
