@@ -13,6 +13,7 @@ class ClientsController < ApplicationController
 
   # GET /clients/new
   def new
+    @client = Client.new
   end
 
   # GET /clients/1/edit
@@ -22,6 +23,21 @@ class ClientsController < ApplicationController
   # POST /clients
   # POST /clients.json
   def create
+    @client = Client.from_params(client_params)
+
+    respond_to do |format|
+      if @client.save
+        format.html do
+          redirect_to @client, flash: { success: I18n.t(:new_success,
+                                                        scope: :resource,
+                                                        resource: Client.model_name.human.capitalize) }
+        end
+        format.json { render :show, status: :created, location: @client }
+      else
+        format.html { render :new }
+        format.json { render json: @client.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /clients/1

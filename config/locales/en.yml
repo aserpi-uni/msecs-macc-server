@@ -36,6 +36,10 @@ en:
         email: "Email"
         password: "Password"
         password_confirmation: "Password confirmation"
+      client:
+        color: "Color"
+        description: "Description"
+        name: "Name"
       worker:
         email: "Email"
         password: "Password"
@@ -47,6 +51,7 @@ en:
         name: "Name"
     models:
       admin: "admin"
+      client: "client"
       worker: "worker"
       workspace: "workspace"
 
