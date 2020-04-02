@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :clients
+
   resources :workspaces do
     member do
       get 'edit_workers'
