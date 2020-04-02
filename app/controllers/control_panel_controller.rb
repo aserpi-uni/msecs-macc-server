@@ -3,7 +3,5 @@ class ControlPanelController < ApplicationController
   before_action { authorize :control_panel }
 
   # GET /control_panel
-  def index
-
-  end
+  def index; end
 end
