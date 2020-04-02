@@ -43,4 +43,6 @@ Rails.application.routes.draw do
 
   get 'google_oauth/id', to: 'google_sign_in#id'
   post 'google_oauth/sign_in', to: 'google_sign_in#sign_in'
+
+  get 'control_panel', to: 'control_panel#index'
 end
