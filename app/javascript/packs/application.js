@@ -21,8 +21,7 @@ require("channels");
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-$('.floating-label .custom-select, .floating-label .form-control').floatinglabel();
-
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-});
+window.onload = function () {
+    $('.floating-label .custom-select, .floating-label .form-control').floatinglabel();
+    $('[data-toggle="tooltip"]').tooltip();
+};
