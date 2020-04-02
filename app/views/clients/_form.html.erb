@@ -13,7 +13,7 @@
 
   <div class="form-group">
     <%= form.label :color %>
-    <%= form.color_field :color, class: "form-control" %>
+    <%= form.color_field :color, class: "form-control", value: color_helper(client.color) %>
   </div>
 
   <%= form.submit submit_label, class: "btn btn-primary" %>

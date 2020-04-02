@@ -79,6 +79,13 @@ en:
 
   back: "Back"
   cancel: "Cancel"
+
+  client:
+    destroy:
+      disclaimer: "All connected projects and activities will also be destroyed."
+      failed: "Could not destroy the client."
+      info: "Delete client"
+
   confirm: "Confirm"
   control_panel: "Control panel"
   create: "Create"

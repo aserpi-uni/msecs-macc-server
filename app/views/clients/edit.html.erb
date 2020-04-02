@@ -1,0 +1,23 @@
+<% title = t :editing, scope: :resource, resource: @client.name %>
+
+<% provide :section, 'client' %>
+<% provide :title, title %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render 'application/breadcrumbs/control_panel' %>
+    <%= render 'application/breadcrumbs/clients', active: false %>
+    <%= render 'application/breadcrumbs/update', active: true, name: @client.name, resource: @client %>
+  </ol>
+</nav>
+
+<div class="jumbotron align-items-center">
+  <h2>
+    <%= title %>
+  </h2>
+
+  <%= render 'form', client: @client, submit_label: t(:save) %>
+
+  <div class="mt-4"></div>
+  <%= render 'application/danger_zone', path: @client, resource: :client %>
+</div>

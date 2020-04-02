@@ -16,8 +16,7 @@ class ClientsController < ApplicationController
   end
 
   # GET /clients/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /clients
   # POST /clients.json
@@ -42,6 +41,19 @@ class ClientsController < ApplicationController
   # PATCH/PUT /clients/1
   # PATCH/PUT /clients/1.json
   def update
+    respond_to do |format|
+      if @client.update(client_params)
+        format.html do
+          redirect_to @client, flash: { success: I18n.t(:edit_success,
+                                                        scope: :resource,
+                                                        resource: Client.model_name.human.capitalize) }
+        end
+        format.json { render :show, status: :ok, location: @client }
+      else
+        format.html { render :edit }
+        format.json { render json: @client.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # DELETE /clients/1
