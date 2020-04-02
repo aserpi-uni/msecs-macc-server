@@ -80,6 +80,11 @@ class ClientsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def client_params
-    params.require(:client).permit(%i[color description name])
+    client_params = params.require(:client).permit(%i[color description name])
+
+    color = Integer(client_params[:color][1..6], 16)
+    client_params[:color] = color.positive? ? color : nil # Use black as default color
+
+    client_params
   end
 end
