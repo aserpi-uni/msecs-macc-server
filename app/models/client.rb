@@ -1,5 +1,7 @@
 class Client < ApplicationRecord
-  has_and_belongs_to_many :workspaces
+  include Updatable
+
+  has_and_belongs_to_many :workspaces, through: :workspaces, after_add: :touch_updated_at, after_remove: :touch_updated_at
   has_many :workers, -> { distinct }, through: :workspaces
 
   validates :name, presence: true, uniqueness: true

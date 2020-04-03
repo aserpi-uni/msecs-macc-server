@@ -1,8 +1,9 @@
 class Worker < ApplicationRecord
+  include Updatable
   devise :database_authenticatable, :lockable, :recoverable, :token_authenticatable, :validatable
 
   has_many :authentication_tokens, class_name: WorkerAuthenticationToken.name, foreign_key: :user_id
-  has_and_belongs_to_many :workspaces
+  has_and_belongs_to_many :workspaces, after_add: :touch_updated_at, after_remove: :touch_updated_at
   has_many :clients, -> { distinct }, through: :workspaces
 
   monetize :bill_rate_cents, with_model_currency: :currency
