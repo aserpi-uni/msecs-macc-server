@@ -6,7 +6,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb shadow-sm">
     <%= render partial: 'application/breadcrumbs/control_panel' %>
-    <%= render partial: 'application/breadcrumbs/workspaces', locals: { active: false } %>
+    <%= render partial: 'application/breadcrumbs/projects', locals: { active: false } %>
     <%= render partial: 'application/breadcrumbs/resource', locals: {
         active: true, name: @project.project_name, resource: @project
     } %>
