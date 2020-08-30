@@ -1,0 +1,25 @@
+<%= form_with(model: @project, local: true) do |form| %>
+  <%= render partial: 'error_messages', locals: { resource: project } %>
+
+  <div class="form-group floating-label">
+    <%= form.label :project_name %>
+    <%= form.text_field :name, class: "form-control", placeholder: true %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: "form-control", placeholder: true %>
+  </div>
+
+  <div class ="form_workspace">
+    <%= form.label :workspace_name %>
+    <%= form.collection_select(:workspace_id, Workspace.all, :id, :name) %>
+
+  </div>
+  <div class="form_delivery">
+    <%= form.label :delivery %>
+    <%= form.text_field :date_of_tour, data:{ provide:'datepicker' } %>
+  </div>
+
+  <%= form.submit submit_label, class: "btn btn-primary" %>
+<% end %>

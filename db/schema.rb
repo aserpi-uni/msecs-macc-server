@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_03_152528) do
+ActiveRecord::Schema.define(version: 2020_08_28_172459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,18 @@ ActiveRecord::Schema.define(version: 2020_04_03_152528) do
     t.bigint "workspace_id", null: false
     t.index ["client_id", "workspace_id"], name: "index_clients_workspaces_on_client_id_and_workspace_id"
     t.index ["workspace_id", "client_id"], name: "index_clients_workspaces_on_workspace_id_and_client_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "project_name"
+    t.string "workspace_name"
+    t.date "delivery_time"
+    t.float "current_cost"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "description"
+    t.bigint "admin_id", null: false
+    t.index ["admin_id"], name: "index_projects_on_admin_id"
   end
 
   create_table "worker_authentication_tokens", force: :cascade do |t|
@@ -92,6 +104,7 @@ ActiveRecord::Schema.define(version: 2020_04_03_152528) do
     t.index ["name"], name: "index_workspaces_on_name", unique: true
   end
 
+  add_foreign_key "projects", "admins"
   add_foreign_key "worker_authentication_tokens", "workers", column: "user_id"
   add_foreign_key "workspaces", "admins"
 end
