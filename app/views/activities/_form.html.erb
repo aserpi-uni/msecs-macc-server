@@ -1,0 +1,10 @@
+<%= form_with(model: activity, local: true) do |form| %>
+  <%= render partial: 'error_messages', locals: { resource: activity } %>
+
+  <div class="form-group floating-label">
+    <%= form.label :description %>
+    <%= form.text_field :name, class: "form-control", placeholder: true %>
+  </div>
+
+  <%= form.submit submit_label, class: "btn btn-primary" %>
+<% end %>

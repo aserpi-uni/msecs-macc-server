@@ -25,4 +25,5 @@
   <span>
     <%= @project.description %>
   </span>
+  <%= link_to "Add Activity", new_activity_path(project_id: @project.id) %>
 </div>

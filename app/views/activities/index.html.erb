@@ -1,0 +1,28 @@
+<% title = @activity.description %>
+
+<% provide :section, 'activity' %>
+<% provide :title, title %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render partial: 'application/breadcrumbs/control_panel' %>
+    <%= render partial: 'application/breadcrumbs/activities', locals: { active: false } %>
+    <%= render partial: 'application/breadcrumbs/resource', locals: {
+        active: true, name: @activity.description, resource: @activity
+    } %>
+  </ol>
+</nav>
+
+<div class="jumbotron align-items-center">
+  <h2 class="d-flex align-items-center">
+    <%= title %>
+
+    <%= button_to edit_activity_path(@activity), method: :get, class: "btn btn-compact btn-outline-primary btn-sm" do %>
+      <span class="material-icons">edit</span>
+    <% end %>
+  </h2>
+
+
+
+  </div>
+</div>
