@@ -1,25 +1,20 @@
-<%= form_with(model: @project, local: true) do |form| %>
-  <%= render partial: 'error_messages', locals: { resource: project } %>
+<% title = t :new, scope: :resource, resource: Project.model_name.human %>
 
-  <div class="form-group floating-label">
-    <%= form.label :project_name %>
-    <%= form.text_field :name, class: "form-control", placeholder: true %>
-  </div>
+<% provide :section, 'project' %>
+<% provide :title, title %>
 
-  <div class="form-group">
-    <%= form.label :description %>
-    <%= form.text_area :description, class: "form-control", placeholder: true %>
-  </div>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render partial: 'application/breadcrumbs/control_panel' %>
+    <%= render partial: 'application/breadcrumbs/projects', locals: { active: false } %>
+    <%= render partial: 'application/breadcrumbs/create', locals: { resource: Project } %>
+  </ol>
+</nav>
 
-  <div class ="form_workspace">
-    <%= form.label :workspace_name %>
-    <%= form.collection_select(:workspace_id, Workspace.all, :id, :name) %>
+<div class="jumbotron align-items-center">
+  <h2>
+    <%= title %>
+  </h2>
 
-  </div>
-  <div class="form_delivery">
-    <%= form.label :delivery %>
-    <%= form.text_field :date_of_tour, data:{ provide:'datepicker' } %>
-  </div>
-
-  <%= form.submit submit_label, class: "btn btn-primary" %>
-<% end %>
+  <%= render 'form', project: @project, password: false, submit_label: t(:create) %>
+</div>
