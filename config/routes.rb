@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   devise_for :workers, controllers: { sessions: 'workers/sessions' }
 
   resources :admins
-  resources :projects
+  resources :projects do
+    resources :activities
+  end
   resources :workers
 
   devise_scope :admin do

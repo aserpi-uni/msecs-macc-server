@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_29_145628) do
+ActiveRecord::Schema.define(version: 2020_08_30_161702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string "activity_description"
+    t.date "delivery_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "admin_id", null: false
+    t.bigint "project_id", null: false
+    t.string "description"
+    t.index ["admin_id"], name: "index_activities_on_admin_id"
+    t.index ["description"], name: "index_activities_on_description", unique: true
+    t.index ["project_id"], name: "index_activities_on_project_id"
+  end
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -48,7 +61,6 @@ ActiveRecord::Schema.define(version: 2020_08_29_145628) do
 
   create_table "projects", force: :cascade do |t|
     t.string "project_name"
-    t.string "workspace_name"
     t.date "delivery_time"
     t.float "current_cost"
     t.datetime "created_at", precision: 6, null: false
@@ -57,7 +69,10 @@ ActiveRecord::Schema.define(version: 2020_08_29_145628) do
     t.bigint "admin_id", null: false
     t.string "status"
     t.string "currency"
+    t.bigint "workspace_id"
     t.index ["admin_id"], name: "index_projects_on_admin_id"
+    t.index ["project_name"], name: "index_projects_on_project_name", unique: true
+    t.index ["workspace_id"], name: "index_projects_on_workspace_id"
   end
 
   create_table "worker_authentication_tokens", force: :cascade do |t|
@@ -85,6 +100,7 @@ ActiveRecord::Schema.define(version: 2020_08_29_145628) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
+    t.boolean "master"
     t.index ["email"], name: "index_workers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_workers_on_reset_password_token", unique: true
   end
@@ -106,7 +122,10 @@ ActiveRecord::Schema.define(version: 2020_08_29_145628) do
     t.index ["name"], name: "index_workspaces_on_name", unique: true
   end
 
+  add_foreign_key "activities", "admins"
+  add_foreign_key "activities", "projects"
   add_foreign_key "projects", "admins"
+  add_foreign_key "projects", "workspaces"
   add_foreign_key "worker_authentication_tokens", "workers", column: "user_id"
   add_foreign_key "workspaces", "admins"
 end

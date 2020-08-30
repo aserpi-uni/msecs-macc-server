@@ -12,8 +12,8 @@
   </div>
 
   <div class ="form_group">
-    <%= form.label :workspace_name %>
-    <%= form.collection_select :workspace_name, Workspace.all, :id, :name%>
+    <%= form.label :workspace %>
+    <%= form.collection_select :workspace_id, Workspace.all, :id, :name%>
 
   </div>
   <div class="form_group">
