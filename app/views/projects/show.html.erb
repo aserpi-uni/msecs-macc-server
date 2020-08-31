@@ -25,5 +25,13 @@
   <span>
     <%= @project.description %>
   </span>
-  <%= link_to "Add Activity", new_activity_path(project_id: @project.id) %>
+  <h2>Activities</h2>
+  <% for activity in @project.activities %>
+    <ul>
+      <li><%= activity.description %></li>
+    </ul>
+  <% end %>
+  <%= link_to 'Add Activity', project_activities_path(@project) %>
+    <br>
+  <%= link_to 'Back', projects_path %>
 </div>

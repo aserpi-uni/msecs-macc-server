@@ -1,10 +1,10 @@
 class Activity < ApplicationRecord
-  belongs_to :admin, polymorphic: true
-  belongs_to :project, polymorphic: true
-  def self.from_params(params)
+  belongs_to :admin
+  belongs_to :project
+  validates_presence_of :description
+  def self.from_params(project, params)
     activity = Activity.new
     activity.admin = params[:admin]
-    activity.project = params[:project]
     activity.description = params[:description]
     activity
   end

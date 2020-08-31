@@ -1,0 +1,23 @@
+<% title = t :editing, scope: :resource, resource: @activity.description %>
+
+<% provide :section, 'project' %>
+<% provide :title, title %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render 'application/breadcrumbs/control_panel' %>
+    <%= render 'application/breadcrumbs/projects', active: false %>
+    <%= render 'application/breadcrumbs/update', active: false, name: @activity.description, resource: @activity %>
+  </ol>
+</nav>
+
+<div class="jumbotron align-items-center">
+  <h2>
+    <%= title %>
+  </h2>
+
+  <%= render 'form', activity: @activity, password: true, submit_label: t(:save) %>
+
+  <div class="mt-4"></div>
+  <%= render 'application/danger_zone', path: @activity, resource: :project %>
+</div>

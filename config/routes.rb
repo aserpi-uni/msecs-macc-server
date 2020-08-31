@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   resources :admins
   resources :projects do
     resources :activities
-  end
-  resources :workers
+    end
+    resources :workers
 
   devise_scope :admin do
     authenticated :admin do

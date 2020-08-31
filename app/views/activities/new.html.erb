@@ -1,12 +1,12 @@
-<% title = t :new, scope: :resource, resource: Workspace.model_name.human %>
+<% title = t :new, scope: :resource, resource: Activity.model_name.human %>
 
-<% provide :section, 'workspace' %>
+<% provide :section, 'activity' %>
 <% provide :title, title %>
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb shadow-sm">
     <%= render partial: 'application/breadcrumbs/control_panel' %>
-    <%= render partial: 'application/breadcrumbs/activities', locals: { active: false } %>
+    <%= render partial: 'application/breadcrumbs/projects', locals: { active: false } %>
     <%= render partial: 'application/breadcrumbs/create', locals: { resource: Activity } %>
   </ol>
 </nav>
@@ -17,4 +17,11 @@
   </h2>
 
   <%= render 'form', activity: @activity, password: false, submit_label: t(:create) %>
+</div>
+
+<div>
+  <h2>
+    <%=link_to 'Back', project_activities_path(@project) %>
+  </h2>
+
 </div>

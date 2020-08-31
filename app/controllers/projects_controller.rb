@@ -4,6 +4,7 @@ class ProjectsController < ApplicationController
   end
   def show
     @project = Project.find(params[:id])
+    @activity = Activity.new(:project=>@project)
   end
   def new
     @project = Project.new

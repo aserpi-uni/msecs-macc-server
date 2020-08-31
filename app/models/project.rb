@@ -1,6 +1,7 @@
 class Project < ApplicationRecord
   belongs_to :admin
   has_one :workspace
+  has_many :activities, :dependent => :destroy
 
   def self.from_params(params)
     project = Project.new
