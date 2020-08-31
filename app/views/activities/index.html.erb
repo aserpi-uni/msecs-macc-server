@@ -4,21 +4,6 @@
 <% provide :title, title %>
 
 
-
-<div class="list-group list-group-flush">
-  <% @activities.each do |activity| %>
-    <div class="list-group-item list-group-item-action">
-      <%= link_to activity.description, activity %>
-      <%= button_to edit_project_activity_path(@project, activity), method: :get, class: "btn btn-compact btn-outline-primary btn-sm" do %>
-        <span class="material-icons">edit</span>
-      <% end %>
-      <br>
-      <small>
-        <%= activity.description %>
-      </small>
-      <br>
-    </div>
-  <% end %>
 </div>
 <div class="jumbotron align-items-center">
   <h2 class="d-flex align-items-center">
@@ -28,8 +13,22 @@
       <span class="material-icons">add</span>
     <% end %>
   </h2>
+  <div class="list-group list-group-flush">
+    <% @activities.each do |activity| %>
+      <div class="list-group-item list-group-item-action">
+        <%= activity.description %>
+        <%= button_to edit_project_activity_path(@project, activity), method: :get, class: "btn btn-compact btn-outline-primary btn-sm" do %>
+          <span class="material-icons">edit</span>
+        <% end %>
+        <br>
+        <small>
+          <%= activity.description %>
+        </small>
+        <br>
+      </div>
+    <% end %>
   <h2>
-    <%=link_to 'Back', project_activities_path(@project) %>
+    <%=link_to 'Back', project_path(@project) %>
   </h2>
 
 
