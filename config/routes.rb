@@ -1,12 +1,19 @@
 Rails.application.routes.draw do
+  resources :workingschedules
+  resources :subactivities
   devise_for :admins
   devise_for :workers, controllers: { sessions: 'workers/sessions' }
 
   resources :admins
   resources :projects do
-    resources :activities
+    resources :activities do
+      resources :subactivities
+      end
     end
-    resources :workers
+    resources :workers do
+      resources :workingschedules
+    end
+
 
   devise_scope :admin do
     authenticated :admin do

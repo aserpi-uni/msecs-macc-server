@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @subactivity.description %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @subactivity.status %>
+</p>
+
+<p>
+  <strong>Activity:</strong>
+  <%= @subactivity.activity_id %>
+</p>
+
+<p>
+  <strong>Worker 1:</strong>
+  <%= @subactivity.worker_1_id %>
+</p>
+
+<p>
+  <strong>Worker 2:</strong>
+  <%= @subactivity.worker_2_id %>
+</p>
+
+<p>
+  <strong>Worker 3:</strong>
+  <%= @subactivity.worker_3_id %>
+</p>
+
+<%= link_to 'Edit', edit_subactivity_path(@subactivity) %> |
+<%= link_to 'Back', subactivities_path %>

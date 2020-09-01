@@ -7,6 +7,12 @@ class Worker < ApplicationRecord
   has_many :clients, -> { distinct }, through: :workspaces
   has_many :projects, through: :workspaces
 
+  has_many :worker_1_activities, class_name: "Activity", foreign_key: "worker_1_id"
+  has_many :worker_2_activities, class_name: "Activity", foreign_key: "worker_2_id"
+  has_many :worker_3_activities, class_name: "Activity", foreign_key: "worker_3_id"
+
+  has_many :workingschedules
+
   monetize :bill_rate_cents, with_model_currency: :currency
 
   def self.from_params(params)

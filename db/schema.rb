@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_30_161702) do
+ActiveRecord::Schema.define(version: 2020_09_01_172653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,21 @@ ActiveRecord::Schema.define(version: 2020_08_30_161702) do
     t.index ["workspace_id"], name: "index_projects_on_workspace_id"
   end
 
+  create_table "subactivities", force: :cascade do |t|
+    t.string "description"
+    t.string "status"
+    t.bigint "activity_id", null: false
+    t.bigint "worker_1_id"
+    t.bigint "worker_2_id"
+    t.bigint "worker_3_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["activity_id"], name: "index_subactivities_on_activity_id"
+    t.index ["worker_1_id"], name: "index_subactivities_on_worker_1_id"
+    t.index ["worker_2_id"], name: "index_subactivities_on_worker_2_id"
+    t.index ["worker_3_id"], name: "index_subactivities_on_worker_3_id"
+  end
+
   create_table "worker_authentication_tokens", force: :cascade do |t|
     t.string "body"
     t.bigint "user_id", null: false
@@ -112,12 +127,24 @@ ActiveRecord::Schema.define(version: 2020_08_30_161702) do
     t.index ["workspace_id", "worker_id"], name: "index_workers_workspaces_on_workspace_id_and_worker_id"
   end
 
+  create_table "workingschedules", force: :cascade do |t|
+    t.integer "hours"
+    t.date "date"
+    t.bigint "worker_id", null: false
+    t.bigint "subactivity_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["subactivity_id"], name: "index_workingschedules_on_subactivity_id"
+    t.index ["worker_id"], name: "index_workingschedules_on_worker_id"
+  end
+
   create_table "workspaces", force: :cascade do |t|
     t.string "description"
     t.string "name"
     t.bigint "admin_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "master_id"
     t.index ["admin_id"], name: "index_workspaces_on_admin_id"
     t.index ["name"], name: "index_workspaces_on_name", unique: true
   end
@@ -126,6 +153,13 @@ ActiveRecord::Schema.define(version: 2020_08_30_161702) do
   add_foreign_key "activities", "projects"
   add_foreign_key "projects", "admins"
   add_foreign_key "projects", "workspaces"
+  add_foreign_key "subactivities", "activities"
+  add_foreign_key "subactivities", "workers", column: "worker_1_id"
+  add_foreign_key "subactivities", "workers", column: "worker_2_id"
+  add_foreign_key "subactivities", "workers", column: "worker_3_id"
   add_foreign_key "worker_authentication_tokens", "workers", column: "user_id"
+  add_foreign_key "workingschedules", "subactivities"
+  add_foreign_key "workingschedules", "workers"
   add_foreign_key "workspaces", "admins"
+  add_foreign_key "workspaces", "workers", column: "master_id"
 end
