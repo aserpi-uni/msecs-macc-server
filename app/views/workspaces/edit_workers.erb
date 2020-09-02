@@ -26,12 +26,12 @@
           <div class="custom-control custom-switch">
             <%= form.check_box "worker_#{worker.id}",
                                name: "workers[#{worker.id}]",
-                               checked: @workspace.workers.exists?(worker.id),
+                               checked: @worker.master,
                                class: "custom-control-input" %>
 
             <span class="custom-control-track"></span>
 
-            <%= form.label "worker_#{worker.id}", class: "custom-control-label" do %>
+            <%= form.label "master: worker_#{worker.id}", class: "custom-control-label" do %>
               <%= link_to worker.email, worker %>
             <% end %>
           </div>
