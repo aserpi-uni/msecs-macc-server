@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :workers do
+    post 'update_master', on: :member
     resources :workingschedules
   end
 

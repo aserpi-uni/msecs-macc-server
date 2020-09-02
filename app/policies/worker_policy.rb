@@ -24,6 +24,10 @@ class WorkerPolicy < ApplicationPolicy
     @logged_user == @worker
   end
 
+  def update_master?
+    @logged_user.is_a?Admin
+  end
+
   def destroy?
     @logged_user.is_a? Admin
   end
