@@ -1,14 +1,13 @@
 class SubactivityPolicy < ApplicationPolicy
   attr_reader :admin, :user
 
-  def initialize(user, subactivity, activity)
+  def initialize(user, subactivity)
     @user = user
-    @activity = activity
     @subactivity = subactivity
   end
 
   def index?
-    @user.is_a? Admin || Worker
+    @user.is_a?(Admin) || @user.is_a?(Worker)
   end
 
   def show?
@@ -17,7 +16,7 @@ class SubactivityPolicy < ApplicationPolicy
   end
 
   def create?
-    @user.is_a? Worker && @user.master
+    @user.is_a?(Worker) && @user.master
   end
 
   def update?

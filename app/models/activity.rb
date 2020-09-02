@@ -2,7 +2,7 @@ class Activity < ApplicationRecord
   belongs_to :admin
   belongs_to :project
   has_one :workspace, through: :project
-  has_one :master, through: :workspace
+
   has_many :subactivities, :dependent => :destroy
   validates_presence_of :description
   def self.from_params(project, params)

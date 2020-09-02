@@ -8,11 +8,12 @@ Rails.application.routes.draw do
   resources :projects do
     resources :activities do
       resources :subactivities
-      end
     end
-    resources :workers do
-      resources :workingschedules
-    end
+  end
+
+  resources :workers do
+    resources :workingschedules
+  end
 
 
   devise_scope :admin do
