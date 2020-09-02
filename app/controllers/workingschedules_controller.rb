@@ -57,7 +57,7 @@ class WorkingschedulesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_workingschedule
-      @workingschedule = Workingschedule.find(params[:id])
+      @workingschedule = @worker.workingschedules.find(params[:id])
     end
 
     def get_worker
