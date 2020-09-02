@@ -1,10 +1,9 @@
 class ActivityPolicy < ApplicationPolicy
   attr_reader :admin, :user
 
-  def initialize(user, activity, project)
+  def initialize(user, activity)
     @user = user
     @activity = activity
-    @project = project
   end
 
   def index?

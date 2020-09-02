@@ -6,7 +6,6 @@ class Subactivity < ApplicationRecord
 
   has_one :project, through: :activity
   has_one :workspace, through: :project
-  has_one :master, through: :workspace
 
   has_many :workingschedules
 
