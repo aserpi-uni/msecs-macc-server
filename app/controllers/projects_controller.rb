@@ -46,9 +46,9 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.update(project_params)
         format.html do
-          redirect_to @workspace, flash: { success: I18n.t(:edit_success,
-                                                           scope: :resource,
-                                                           resource: Project.model_name.human.capitalize) }
+          redirect_to @project, flash: { success: I18n.t(:edit_success,
+                                                         scope: :resource,
+                                                         resource: Project.model_name.human.capitalize) }
         end
         format.json { render :show, status: :ok, location: @project }
       else
