@@ -52,6 +52,7 @@ en:
     models:
       admin: "admin"
       client: "client"
+      project: "project"
       worker: "worker"
       workspace: "workspace"
 

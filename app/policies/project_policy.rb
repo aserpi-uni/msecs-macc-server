@@ -1,17 +1,16 @@
 class ProjectPolicy < ApplicationPolicy
-  attr_reader :admin, :user
-
   def initialize(user, project)
     @user = user
     @project = project
   end
 
   def index?
-    @user.is_a? Admin
+    @user.is_a?(Admin) || @user.is_a?(Worker)
   end
 
   def show?
-    @project.admin == @user
+    (@user.is_a?(Admin) && @project.workspace.admin == @user) ||
+        (@user.is_a?(Worker) && @project.workspace.workers.include?(@user))
   end
 
   def create?
@@ -19,20 +18,16 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def update?
-    show?
+    create?
   end
 
   def destroy?
-    show?
-  end
-
-  def transfer_supervision?
-    show?
+    create?
   end
 
   class Scope < Scope
     def resolve
-      scope.where(admin: @user)
+      scope.where(workspace_id: @user.workspaces)
     end
   end
 end
