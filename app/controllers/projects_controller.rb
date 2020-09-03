@@ -1,11 +1,13 @@
 class ProjectsController < ApplicationController
+  before_action :set_project, only: %i[show]
+
   def index
     @projects = policy_scope(Project)
   end
-  def show
-    @project = Project.find(params[:id])
-    @activity = Activity.new(:project=>@project)
-  end
+
+  # GET /projects/1
+  def show;end
+
   def new
     @project = Project.new
   end
@@ -34,6 +36,12 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_project
+    @project = Project.find(params[:id])
+  end
+
   def project_params
     params.require(:project).permit(:project_name, :workspace_id, :description, :delivery_time, :current_cost, :currency, :status)
   end

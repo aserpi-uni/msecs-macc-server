@@ -1,11 +1,11 @@
-json.extract! project, description
+json.extract! project, :description, :status
 
-json.deliveryTime project.delivery_time
+json.deliveryTime project.delivery_time.iso8601
 json.projectName project.project_name
 
-json.workspace project.workspace do |workspace|
-  json.name workspace.name
-  json.url workspace_url(workspace, format: :json)
+json.workspace do
+  json.name project.workspace.name
+  json.url workspace_url(project.workspace, format: :json)
 end
 
 json.url project_url(project, format: :json)
