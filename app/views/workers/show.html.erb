@@ -18,7 +18,7 @@
   </h2>
 
   <% if current_admin %>
-    <%= form_with(url: update_master_worker_path(@worker), method: :post, local: false, class: "form") do |form| %>
+    <%= form_with(url: update_master_worker_path(@worker), method: :patch, local: false, class: "form") do |form| %>
       <div class="custom-control custom-switch" style="margin-bottom: 24px;">
         <%= form.check_box "master", name: "worker[master]", checked: @worker.master, class: "custom-control-input",
                            onclick: "$('.form').submit();" %>
