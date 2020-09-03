@@ -103,6 +103,12 @@ en:
     irreversible: "This action is irreversible."
     sure?: "Are you sure?"
 
+  project:
+    destroy:
+      disclaimer: "The project and all its activities will be eliminated."
+      failed: "Could not destroy project."
+      info: "Delete project"
+
   resource:
     editing: "Editing %{resource}"
     destroy_success: "%{resource} was successfully destroyed"
