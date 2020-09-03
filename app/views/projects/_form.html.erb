@@ -16,10 +16,7 @@
     <%= form.collection_select :workspace_id, Workspace.all, :id, :name, {}, { class: "form-control" } %>
   </div>
 
-  <div class="form-group form-inline">
-    <%= form.label :delivery_time_1i, "Delivery", style: "margin-right: 8px;" %>
-    <%= form.datetime_select :delivery_time, {}, class: "form-control" %>
-  </div>
+  <%= render 'application/form/delivery_time', form: form %>
 
   <div class = "form-group">
     <%= form.label :current_cost %>
@@ -35,24 +32,7 @@
             {}, { class: "form-control"}) %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :status, "Status", style: "margin-right: 8px;" %>
-
-    <div class = "custom-control custom-radio custom-control-inline">
-      <%= form.radio_button :status, 'undefined', checked: true, class: "custom-control-input" %>
-      <%= form.label :status_undefined, 'Undefined', class: "custom-control-label" %>
-    </div>
-
-    <div class = "custom-control custom-radio custom-control-inline">
-      <%= form.radio_button :status, 'ongoing', class: "custom-control-input" %>
-      <%= form.label :status_ongoing, 'Ongoing', class: "custom-control-label" %>
-    </div>
-
-    <div class = "custom-control custom-radio custom-control-inline">
-      <%= form.radio_button :status, 'finished', class: "custom-control-input" %>
-      <%= form.label :status_finished, 'Finished', class: "custom-control-label" %>
-    </div>
-  </div>
+  <%= render "application/form/status", form: form %>
 
   <div class="form-group">
     <%= form.submit submit_label, class: "btn btn-primary" %>

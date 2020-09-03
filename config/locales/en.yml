@@ -50,6 +50,7 @@ en:
         description: "Description"
         name: "Name"
     models:
+      activity: "activity"
       admin: "admin"
       client: "client"
       project: "project"

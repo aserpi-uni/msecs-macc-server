@@ -7,22 +7,28 @@ class ActivitiesController < ApplicationController
   def new
     @activity = @project.activities.build
   end
-  def create
 
+  # POST /project/1/activities/new
+  def create
     params = activity_params
     params[:admin] = current_admin
-    #@activity = Activity.from_params(@project, params)
-
-
     @activity = @project.activities.build(params)
-    if @activity.save
-      flash[:notice] = 'Activity created'
-      redirect_to @activity
-    else
-      flash[:notice] = 'Error in creating activity: #{@activity.errors}'
-      redirect_to @activity
+
+    respond_to do |format|
+      if @activity.save
+        format.html do
+          redirect_to project_activity_path(@project, @activity), flash: { success: I18n.t(:new_success,
+                                                                                           scope: :resource,
+                                                                                           resource: Activity.model_name.human.capitalize) }
+        end
+        format.json { render :show, status: :created, location: project_activity_url(@project, @activity) }
+      else
+        format.html { render :new }
+        format.json { render json: @activity.errors, status: :unprocessable_entity }
+      end
     end
   end
+
   def show
     @activity = Activity.find(params[:id])
   end
@@ -50,7 +56,7 @@ class ActivitiesController < ApplicationController
 
   private
   def activity_params
-    params.require(:activity).permit(:description, :project_id)
+    params.require(:activity).permit(:delivery_time, :description, :project_id, :status)
   end
   def get_project
     @project = Project.find(params[:project_id])

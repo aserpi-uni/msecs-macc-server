@@ -6,5 +6,9 @@
     <%= form.text_field :description, class: "form-control", placeholder: true %>
   </div>
 
+  <%= render 'application/form/delivery_time', form: form %>
+
+  <%= render 'application/form/status', form: form %>
+
   <%= form.submit submit_label, class: "btn btn-primary" %>
 <% end %>
