@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_03_223751) do
+ActiveRecord::Schema.define(version: 2020_09_03_231647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,7 +70,9 @@ ActiveRecord::Schema.define(version: 2020_09_03_223751) do
     t.string "status"
     t.string "currency"
     t.bigint "workspace_id"
+    t.bigint "client_id", null: false
     t.index ["admin_id"], name: "index_projects_on_admin_id"
+    t.index ["client_id"], name: "index_projects_on_client_id"
     t.index ["project_name"], name: "index_projects_on_project_name", unique: true
     t.index ["workspace_id"], name: "index_projects_on_workspace_id"
   end
@@ -152,6 +154,7 @@ ActiveRecord::Schema.define(version: 2020_09_03_223751) do
   add_foreign_key "activities", "admins"
   add_foreign_key "activities", "projects"
   add_foreign_key "projects", "admins"
+  add_foreign_key "projects", "clients"
   add_foreign_key "projects", "workspaces"
   add_foreign_key "subactivities", "activities"
   add_foreign_key "subactivities", "workers", column: "worker_1_id"
