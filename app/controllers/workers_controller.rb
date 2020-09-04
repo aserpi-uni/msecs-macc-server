@@ -1,7 +1,7 @@
 class WorkersController < ApplicationController
   after_action :verify_authorized
-  before_action :set_worker, only: %i[show update destroy]
-  before_action only: %i[index show_self new create destroy] do
+  before_action :set_worker, only: %i[show update update_master destroy]
+  before_action only: %i[index show_self new create update_master destroy] do
     authorize Worker
   end
   before_action only: %i[show update] do
@@ -66,6 +66,11 @@ class WorkersController < ApplicationController
         format.json { render json: @worker.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # PATCH/PUT /workers/1/edit_master
+  def update_master
+    @worker.update(params.require(:worker).permit(:master))
   end
 
   # DELETE /workers/1
