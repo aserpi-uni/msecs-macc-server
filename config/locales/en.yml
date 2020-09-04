@@ -48,6 +48,7 @@ en:
         admin: "Supervisor"
         billable: "Billable"
         description: "Description"
+        master: "Master"
         name: "Name"
     models:
       activity: "activity"
@@ -139,6 +140,9 @@ en:
     update_clients:
       failed: "Could not update the list of clients."
       success: "The list of clients was successfully updated."
+    update_master:
+      failed: "Could not update the master."
+      success: "The master was successfully updated."
     destroy:
       disclaimer: "All relative activities will also be deleted."
       info: "Delete workspace"
