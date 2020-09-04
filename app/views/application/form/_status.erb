@@ -1,0 +1,18 @@
+<div class="form-group">
+  <%= form.label :status, "Status", style: "margin-right: 8px;" %>
+
+  <div class = "custom-control custom-radio custom-control-inline">
+    <%= form.radio_button :status, 'undefined', checked: true, class: "custom-control-input" %>
+    <%= form.label :status_undefined, 'Undefined', class: "custom-control-label" %>
+  </div>
+
+  <div class = "custom-control custom-radio custom-control-inline">
+    <%= form.radio_button :status, 'ongoing', class: "custom-control-input" %>
+    <%= form.label :status_ongoing, 'Ongoing', class: "custom-control-label" %>
+  </div>
+
+  <div class = "custom-control custom-radio custom-control-inline">
+    <%= form.radio_button :status, 'finished', class: "custom-control-input" %>
+    <%= form.label :status_finished, 'Finished', class: "custom-control-label" %>
+  </div>
+</div>

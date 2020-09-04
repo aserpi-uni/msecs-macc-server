@@ -11,31 +11,30 @@
     <%= form.text_area :description, class: "form-control", placeholder: true %>
   </div>
 
-  <div class ="form_group">
-    <%= form.label :workspace %>
-    <%= form.collection_select :workspace_id, Workspace.all, :id, :name%>
+  <div class ="form-group">
+    <%= form.label :workspace_id %>
+    <%= form.collection_select :workspace_id, Workspace.all, :id, :name, {}, { class: "form-control" } %>
+  </div>
 
-  </div>
-  <div class="form_group">
-    <%= form.label :delivery %>
-    <%= form.datetime_select :delivery_time, class: "form-control", placeholder: true %>
-  </div>
-  <div class = "form_group">
+  <%= render 'application/form/delivery_time', form: form %>
+
+  <div class = "form-group">
     <%= form.label :current_cost %>
-    <%= form.number_field :current_cost, :step => "0.1"%>
-  </div>
-  <div class = "form_group">
-    <%= form.label :currency %>
-    <%= form.text_field :currency, :step => "0.1"%>
-  </div>
-  <div class = "form_group">
-    <%= form.radio_button :status, 'undefined', :checked => true %>
-    <%= label :status_undefined, 'Undefined' %>
-    <%= form.radio_button :status, 'ongoing' %>
-    <%= label :status_ongoing, 'Ongoing' %>
-    <%= form.radio_button :status, 'finished' %>
-    <%= label :status_finished, 'Finished' %>
+    <%= form.number_field :current_cost, class: "form-control", step: "0.01"%>
   </div>
 
-  <%= form.submit submit_label, class: "btn btn-primary" %>
+  <div class = "form-group">
+    <%= form.label :currency %>
+    <%= form.collection_select(
+            :currency,
+            Money::Currency.table.values.map { |c| OpenStruct.new({name: c[:name], iso_code: c[:iso_code]}) }.sort_by { |c| c.name},
+            :iso_code, :name,
+            {}, { class: "form-control"}) %>
+  </div>
+
+  <%= render "application/form/status", form: form %>
+
+  <div class="form-group">
+    <%= form.submit submit_label, class: "btn btn-primary" %>
+  </div>
 <% end %>

@@ -55,4 +55,5 @@ gem 'pundit'
 gem 'tiddle'
 
 # Currencies
+gem 'eu_central_bank'
 gem 'money-rails'

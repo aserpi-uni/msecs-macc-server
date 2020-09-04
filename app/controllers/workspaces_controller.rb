@@ -147,6 +147,6 @@ class WorkspacesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def workspace_params
-    params.require(:workspace).permit(%i[description name])
+    params.require(:workspace).permit(%i[description master_id name])
   end
 end

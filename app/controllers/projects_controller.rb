@@ -1,41 +1,85 @@
 class ProjectsController < ApplicationController
+  after_action :verify_authorized
+  before_action :set_project, only: %i[show edit update destroy]
+  before_action(only: %i[index new create edit update destroy]) { authorize Project }
+  before_action(only: %i[show]) { authorize @project }
+
+  # GET /projects
   def index
     @projects = policy_scope(Project)
   end
-  def show
-    @project = Project.find(params[:id])
-    @activity = Activity.new(:project=>@project)
-  end
+
+  # GET /projects/1
+  def show; end
+
+  # GET /projects/new
   def new
     @project = Project.new
   end
+
+  # POST /projects/new
   def create
     params = project_params
     params[:admin] = current_admin
-    params[:current_cost] = 0
     @project = Project.from_params(params)
-    print(params[:status])
-    @project.save
-    redirect_to @project
 
+    respond_to do |format|
+      if @project.save
+        format.html do
+          redirect_to @project, flash: { success: I18n.t(:new_success,
+                                                           scope: :resource,
+                                                           resource: Project.model_name.human.capitalize) }
+        end
+        format.json { render :show, status: :created, location: @project }
+      else
+        format.html { render :new }
+        format.json { render json: @project.errors, status: :unprocessable_entity }
+      end
+    end
   end
-  def edit
-    @project = Project.find(params[:id])
-  end
+
+  #  /projects/1
+  def edit; end
+
+  # PATCH/PUT /projects/1
   def update
-    @project = Project.find(params[:id])
-    @project.update(project_params)
-    redirect_to @project
+    respond_to do |format|
+      if @project.update(project_params)
+        format.html do
+          redirect_to @project, flash: { success: I18n.t(:edit_success,
+                                                         scope: :resource,
+                                                         resource: Project.model_name.human.capitalize) }
+        end
+        format.json { render :show, status: :ok, location: @project }
+      else
+        format.html { render :edit }
+        format.json { render json: @project.errors, status: :unprocessable_entity }
+      end
+    end
   end
+
+  # DELETE /projects/1
   def destroy
-    @project = Project.find(params[:id])
     @project.destroy
-    redirect_to projects_path
+    respond_to do |format|
+      format.html do
+        redirect_to projects_path, flash: { success: I18n.t(:destroy_success,
+                                                              scope: :resource,
+                                                              resource: Project.model_name.human.capitalize) }
+      end
+      format.json { head :no_content }
+    end
   end
 
   private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_project
+    @project = Project.find(params[:id])
+  end
+
   def project_params
-    params.require(:project).permit(:project_name, :workspace_name, :description, :delivery_time, :current_cost, :currency, :status)
+    params.require(:project).permit(:project_name, :workspace_id, :description, :delivery_time, :current_cost, :currency, :status)
   end
 
 end
