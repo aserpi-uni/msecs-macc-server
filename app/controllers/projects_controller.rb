@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
   def create
     params = project_params
     params[:admin] = current_admin
-    @project = Project.from_params(params)
+    @project = Project.new(params)
 
     respond_to do |format|
       if @project.save
