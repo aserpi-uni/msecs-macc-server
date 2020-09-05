@@ -33,11 +33,6 @@
   <%= render 'application/form/delivery_time', form: form %>
 
   <div class = "form-group">
-    <%= form.label :current_cost %>
-    <%= form.number_field :current_cost, class: "form-control", step: "0.01"%>
-  </div>
-
-  <div class = "form-group">
     <%= form.label :currency %>
     <%= form.collection_select(
             :currency,
