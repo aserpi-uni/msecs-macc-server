@@ -5,5 +5,5 @@ function welcome_img_margin() {
     welcome_img.css("margin-top", (document.documentElement.clientHeight - welcome_img.height())/3 + "px");
 }
 
-window.onload = welcome_img_margin;
-window.onresize = welcome_img_margin;
+$(window).on("load", welcome_img_margin);
+$(window).resize(welcome_img_margin);

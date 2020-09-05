@@ -1,4 +1,4 @@
-window.onload = function() {
+$(document).ready(function() {
     const clientSelect = $("#project_client_id");
     const workspaceSelect = $("#project_workspace_id");
 
@@ -19,4 +19,4 @@ window.onload = function() {
 
     workspaceSelect.change(function () { propagateSelect(this.value) })
     propagateSelect(workspaceSelect.value)
-}
+});
