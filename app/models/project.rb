@@ -1,5 +1,4 @@
 class Project < ApplicationRecord
-  belongs_to :admin
   belongs_to :client
   belongs_to :workspace
 

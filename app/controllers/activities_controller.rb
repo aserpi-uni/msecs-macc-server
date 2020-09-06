@@ -9,7 +9,6 @@ class ActivitiesController < ApplicationController
   # POST /project/1/activities/new
   def create
     params = activity_params
-    params[:admin] = current_admin
     @activity = @project.activities.build(params)
 
     respond_to do |format|

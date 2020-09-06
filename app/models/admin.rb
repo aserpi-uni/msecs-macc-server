@@ -7,7 +7,6 @@ class Admin < ApplicationRecord
   before_destroy :check_workspaces, :check_projects
 
   has_many :workspaces
-  has_many :projects
 
   def check_workspaces
     return true if workspaces.empty?

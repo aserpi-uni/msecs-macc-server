@@ -20,7 +20,6 @@ class ProjectsController < ApplicationController
   # POST /projects/new
   def create
     params = project_params
-    params[:admin] = current_admin
     @project = Project.new(params)
 
     respond_to do |format|

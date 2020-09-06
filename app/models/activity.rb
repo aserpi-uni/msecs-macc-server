@@ -1,5 +1,4 @@
 class Activity < ApplicationRecord
-  belongs_to :admin
   belongs_to :project
   has_one :workspace, through: :project
 
