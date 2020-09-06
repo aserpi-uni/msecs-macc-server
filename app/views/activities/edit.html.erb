@@ -7,7 +7,9 @@
   <ol class="breadcrumb shadow-sm">
     <%= render 'application/breadcrumbs/control_panel' %>
     <%= render 'application/breadcrumbs/projects', active: false %>
-    <%= render 'application/breadcrumbs/update', active: true, name: @activity.description, resource: @activity %>
+    <%= render 'application/breadcrumbs/resource', active: false, name: @project.project_name, resource: @project %>
+    <%= render 'application/breadcrumbs/activities' %>
+    <%= render 'application/breadcrumbs/update', active: true, name: @activity.description, resource: [@project, @activity] %>
   </ol>
 </nav>
 
@@ -16,8 +18,8 @@
     <%= title %>
   </h2>
 
-  <%= render 'form', activity: @activity, password: true, submit_label: t(:save) %>
+  <%= render 'form', activity: @activity, submit_label: t(:save) %>
 
   <div class="mt-4"></div>
-  <%= render 'application/danger_zone', path: @activity, resource: :project %>
+  <%= render 'application/danger_zone', path: project_activity_path([@project, @activity]), resource: :project %>
 </div>
