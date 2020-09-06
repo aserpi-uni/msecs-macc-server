@@ -23,5 +23,6 @@ require("channels");
 
 $(window).on("load", function () {
     $('.floating-label .custom-select, .floating-label .form-control').floatinglabel();
+    $('.form-date-picker').pickdate({selectMonths: true, selectYears: true});
     $('[data-toggle="tooltip"]').tooltip();
 })
