@@ -6,10 +6,6 @@ class ActivityPolicy < ApplicationPolicy
     @activity = activity
   end
 
-  def index?
-    @user.is_a? Admin
-  end
-
   def show?
     @activity.admin == @user
   end

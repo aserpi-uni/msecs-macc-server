@@ -1,9 +1,7 @@
 class ActivitiesController < ApplicationController
   before_action :get_project
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
-  def index
-    @activities= @project.activities
-  end
+
   def new
     @activity = @project.activities.build
   end
