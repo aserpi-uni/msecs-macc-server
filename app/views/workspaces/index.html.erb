@@ -38,6 +38,10 @@
             <%= workspace.clients.count %>
           </span>
 
+          <span class="badge badge-primary badge-pill" data-toggle="tooltip" data-placement="top" title="<%= Project.model_name.human.capitalize.pluralize %>">
+            <%= workspace.projects.count %>
+          </span>
+
           <span class="badge badge-primary badge-pill" data-toggle="tooltip" data-placement="top" title="<%= Worker.model_name.human.capitalize.pluralize %>">
             <%= workspace.workers.count %>
           </span>

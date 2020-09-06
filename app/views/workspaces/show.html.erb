@@ -63,4 +63,23 @@
       </div>
     <% end %>
   </div>
+
+  <h4 class="d-flex align-items-center mt-3">
+    <%= Project.model_name.human.pluralize.capitalize %> (<%= @workspace.projects.count %>)
+  </h4>
+
+  <div class="list-group list-group-flush">
+    <% @workspace.projects.each do |project| %>
+      <div class="list-group-item list-group-item-flush">
+        <%= link_to project, { style: "color: #{color_helper project.client.color};" } do %>
+          <% icon = status_icon(project) %>
+          <span class="material-icons" style="color: <%= icon[:color] %>;margin-right: 8px;">
+            <%= icon[:icon] %>
+          </span>
+
+          <%= project.project_name %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>

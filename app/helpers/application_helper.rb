@@ -23,4 +23,16 @@ module ApplicationHelper
   def color_helper(color)
     color ? "##{color.to_s(16).rjust(6, '0')}" : nil
   end
+
+  def status_icon(resource)
+    if resource.status == "finished"
+      { color: "#c8e6c9", icon: :check_circle }
+    elsif resource.status == "undefined"
+      { color: "#757575", icon: :help }
+    elsif resource.delivery_time < DateTime.now
+      { color: "#ffcdd2", icon: :error }
+    else
+      { color: "#bbdefb", icon: :play_circle_filled }
+    end
+  end
 end

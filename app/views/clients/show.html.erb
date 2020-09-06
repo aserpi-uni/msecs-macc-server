@@ -45,4 +45,23 @@
       </div>
     <% end %>
   </div>
+
+  <h4 class="d-flex align-items-center mt-3">
+    <%= Project.model_name.human.pluralize.capitalize %> (<%= @client.projects.count %>)
+  </h4>
+
+  <div class="list-group list-group-flush">
+    <% @client.projects.each do |project| %>
+      <div class="list-group-item list-group-item-flush">
+        <%= link_to project do %>
+          <% icon = status_icon(project) %>
+          <span class="material-icons" style="color: <%= icon[:color] %>;margin-right: 8px;">
+            <%= icon[:icon] %>
+          </span>
+
+          <%= project.project_name %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
