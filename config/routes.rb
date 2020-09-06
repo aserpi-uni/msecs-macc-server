@@ -13,15 +13,12 @@ Rails.application.routes.draw do
 
   resources :projects do
     resources :activities, except: :index do
-      resources :subactivities
+      resources :subactivities, except: :index
     end
   end
 
-  resources :subactivities
-
   resources :workers do
     patch 'update_master', on: :member
-    resources :workingschedules
   end
 
   resources :workingschedules
