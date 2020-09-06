@@ -1,6 +1,8 @@
 class ActivitiesController < ApplicationController
+  after_action :verify_authorized
   before_action :get_project
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
+  before_action(only: %i[show new create edit update destroy]) { authorize @project }
 
   def new
     @activity = @project.activities.build
