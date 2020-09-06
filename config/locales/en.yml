@@ -111,6 +111,7 @@ en:
       disclaimer: "The project and all its activities will be eliminated."
       failed: "Could not destroy project."
       info: "Delete project"
+    info: "This project is followed by %{workspace} for %{client}."
 
   resource:
     editing: "Editing %{resource}"

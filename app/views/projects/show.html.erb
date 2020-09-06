@@ -22,16 +22,37 @@
     <% end %>
   </h2>
 
-  <span>
+  <p>
     <%= @project.description %>
-  </span>
-  <h2>Activities</h2>
-  <% for activity in @project.activities %>
-    <ul>
-      <li><%= activity.description %></li>
-    </ul>
-  <% end %>
-  <%= link_to 'Add Activity', project_activities_path(@project) %>
-    <br>
-  <%= link_to 'Back', projects_path %>
+  </p>
+
+  <p>
+    <%= t(:info, scope: :project,
+          client: link_to(@project.client.name, @project.client, style: "color: #{color_helper(@project.client.color)}"),
+          workspace: link_to(@project.workspace.name, @project.workspace)).html_safe %>
+  </p>
+
+
+  <h4 class="d-flex align-items-center mt-3">
+    <%= Activity.model_name.human.pluralize.capitalize %> (<%= @project.activities.count %>)
+
+    <%= button_to new_project_activity_path(@project), method: :get, class: "btn btn-compact btn-outline-primary btn-sm" do %>
+      <span class="material-icons">add_task</span>
+    <% end %>
+  </h4>
+
+  <div class="list-group list-group-flush">
+    <% @project.activities.each do |activity| %>
+      <div class="list-group-item list-group-item-flush">
+        <%= link_to project_activity_path(@project, activity) do %>
+          <% icon = status_icon(activity) %>
+          <span class="material-icons" style="color: <%= icon[:color] %>;margin-right: 8px;">
+            <%= icon[:icon] %>
+          </span>
+
+          <%= activity.description %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
