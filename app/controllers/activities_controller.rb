@@ -1,14 +1,18 @@
 class ActivitiesController < ApplicationController
   after_action :verify_authorized
-  before_action :get_project
+  before_action :set_project
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
   before_action(only: %i[show new create edit update destroy]) { authorize @project }
 
+  # GET /projects/1/activities/1
+  def show; end
+
+  # GET /projects/1/activities/new
   def new
     @activity = @project.activities.build
   end
 
-  # POST /project/1/activities/new
+  # POST /projects/1/activities/new
   def create
     params = activity_params
     @activity = @project.activities.build(params)
@@ -28,39 +32,46 @@ class ActivitiesController < ApplicationController
     end
   end
 
-  def show
-    @activity = Activity.find(params[:id])
-  end
-  def edit
+  # GET /projects/1/activities/1/edit
+  def edit; end
 
-  end
+  # POST /projects/1/activities/1/edit
   def update
     respond_to do |format|
       if @activity.update(activity_params)
-        format.html { redirect_to project_activity_path(@project), notice: 'Activity was successfully updated.' }
+        format.html { redirect_to project_activity_path(@project), success: I18n.t(:edit_success,
+                                                                                   scope: :resource,
+                                                                                   resource: Activity.model_name.human.capitalize) }
         format.json { render :show, status: :ok, location: @activity }
       else
         format.html { render :edit }
         format.json { render json: @ativity.errors, status: :unprocessable_entity }
         end
       end
-    end
+  end
+
+  # DELETE /projects/1/activities/1
   def destroy
     @activity.destroy
     respond_to do |format|
-      format.html { redirect_to project_activities_path(@project), notice: 'Activity was successfully destroyed.' }
+      format.html { redirect_to project_path(@project), success: I18n.t(:destroy_success,
+                                                                        scope: :resource,
+                                                                        resource: Activity.model_name.human.capitalize) }
       format.json { head :no_content }
       end
   end
 
   private
+
   def activity_params
     params.require(:activity).permit(:delivery_time, :description, :project_id, :status)
   end
-  def get_project
-    @project = Project.find(params[:project_id])
-  end
+
   def set_activity
     @activity = @project.activities.find(params[:id])
+  end
+
+  def set_project
+    @project = Project.find(params[:project_id])
   end
 end
