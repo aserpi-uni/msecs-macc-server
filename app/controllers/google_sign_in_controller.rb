@@ -2,7 +2,7 @@ class GoogleSignInController < ApplicationController
 
   # GET google_oauth/id
   def id
-    render plain: ENV['GOOGLE_OAUTH_ID'], status: 200
+    render plain: Rails.application.credentials.google_oauth_id, status: 200
   end
 
   # POST google_oauth/sign_in.json
@@ -11,7 +11,7 @@ class GoogleSignInController < ApplicationController
     token_id = params.require(:id_token)
 
     begin
-      validated_token = validator.check(token_id, ENV['GOOGLE_OAUTH_ID'], nil)
+      validated_token = validator.check(token_id, Rails.application.credentials.google_oauth_id, nil)
     rescue GoogleIDToken::ValidationError
       return head :forbidden
     end
