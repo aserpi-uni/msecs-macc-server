@@ -50,6 +50,7 @@ Rails.application.routes.draw do
       post 'update_clients'
       post 'update_workers'
       patch 'transfer_supervision'
+      get 'get_workers'
     end
   end
 

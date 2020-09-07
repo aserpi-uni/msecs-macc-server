@@ -122,6 +122,22 @@ class WorkspacesController < ApplicationController
     end
   end
 
+  # GET /workspaces/1/get_workers
+  # GET /workspaces/1/get_workers.json
+
+  def get_workers_id
+    respond_to do |format|
+      format.html do
+        redirect_to workspaces_path, flash: { success: I18n.t(:destroy_success,
+                                                              scope: :resource,
+                                                              resource: Workspace.model_name.human.capitalize) }
+      end
+      format.json { head :no_content }
+
+      end
+    end
+  end
+
   # PATCH/PUT /workspaces/1/transfer_ownership
   # PATCH/PUT /workspaces/1/transfer_ownership.json
   def transfer_supervision
@@ -149,4 +165,4 @@ class WorkspacesController < ApplicationController
   def workspace_params
     params.require(:workspace).permit(%i[description master_id name])
   end
-end
+
