@@ -36,18 +36,24 @@
   <div class="list-group list-group-flush">
     <% @activity.subactivities.each do |subactivity| %>
       <div class="list-group-item list-group-item-flush">
-        <% icon = status_icon(subactivity) %>
-        <span class="material-icons" style="color: <%= icon[:color] %>;margin-right: 8px;">
-          <%= icon[:icon] %>
-        </span>
 
-        <%= subactivity.description %>
 
-        <%= link_to subactivity.worker_1.email, subactivity.worker_1 %>
+        <div style="display: flex;justify-content: space-between;">
+          <div>
+            <% icon = status_icon(subactivity) %>
+            <span class="material-icons" style="color: <%= icon[:color] %>;margin-right: 8px;">
+              <%= icon[:icon] %>
+            </span>
 
-        <%= link_to subactivity.worker_2.email, subactivity.worker_2 %>
+            <%= subactivity.description %>
+          </div>
 
-        <%= link_to subactivity.worker_3.email, subactivity.worker_3 %>
+          <%= link_to subactivity.worker_1.email, subactivity.worker_1 %>
+
+          <%= link_to subactivity.worker_2.email, subactivity.worker_2 %>
+
+          <%= link_to subactivity.worker_3.email, subactivity.worker_3 %>
+        </div>
       </div>
     <% end %>
   </div>
