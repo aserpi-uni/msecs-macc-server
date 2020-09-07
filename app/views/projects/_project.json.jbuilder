@@ -1,6 +1,7 @@
 json.extract! project, :description, :status
 
 json.deliveryTime project.delivery_time.iso8601
+json.master(project.workspace.master_id == current_worker.id) if current_worker
 json.projectName project.project_name
 
 json.activities project.activities do |activity|
