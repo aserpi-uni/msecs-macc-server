@@ -1,8 +1,8 @@
 class ProjectsController < ApplicationController
   after_action :verify_authorized
-  before_action :set_project, only: %i[show edit update destroy]
-  before_action(only: %i[index new create edit update destroy]) { authorize Project }
-  before_action(only: %i[show]) { authorize @project }
+  before_action :set_project, only: %i[show show_cost edit update destroy]
+  before_action(only: %i[index new create]) { authorize Project }
+  before_action(only: %i[show show_cost edit update destroy]) { authorize @project }
 
   # GET /projects
   def index
@@ -12,6 +12,17 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   def show; end
 
+  # GET /projects/1/show_cost
+  def show_cost
+    bank = Money.default_bank
+    bank.update_rates
+
+    query = Worker.joins(:workingschedules, workingschedules: {subactivity: :activity})
+                .where(activities: {project_id: 4})
+                .select(:hours, :bill_rate_cents, :currency)
+    @cost = query.map { |h, b, c| bank.exchange(h * b, c, project.currency) }.sum
+  end
+
   # GET /projects/new
   def new
     @project = Project.new
@@ -20,8 +31,7 @@ class ProjectsController < ApplicationController
   # POST /projects/new
   def create
     params = project_params
-    params[:admin] = current_admin
-    @project = Project.from_params(params)
+    @project = Project.new(params)
 
     respond_to do |format|
       if @project.save
@@ -79,7 +89,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:project_name, :workspace_id, :description, :delivery_time, :current_cost, :currency, :status)
+    params.require(:project).permit(:project_name, :client_id, :workspace_id, :description, :delivery_time, :current_cost, :currency, :status)
   end
 
 end

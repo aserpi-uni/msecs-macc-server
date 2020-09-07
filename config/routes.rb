@@ -1,21 +1,42 @@
 Rails.application.routes.draw do
-  resources :workingschedules
-  resources :subactivities
   devise_for :admins
   devise_for :workers, controllers: { sessions: 'workers/sessions' }
 
   resources :admins
+
+  resources :clients do
+    member do
+      get 'edit_workspaces'
+      post 'update_workspaces'
+    end
+  end
+
   resources :projects do
-    resources :activities do
-      resources :subactivities
+    get 'show_cost', on: :member
+
+    resources :activities, except: :index do
+      get 'show_cost', on: :member
+
+      resources :subactivities, except: :index
     end
   end
 
   resources :workers do
     patch 'update_master', on: :member
-    resources :workingschedules
   end
 
+  resources :workingschedules
+
+  resources :workspaces do
+    member do
+      get 'get_workers'
+      get 'edit_clients'
+      get 'edit_workers'
+      post 'update_clients'
+      post 'update_workers'
+      patch 'transfer_supervision'
+    end
+  end
 
   devise_scope :admin do
     authenticated :admin do
@@ -33,24 +54,6 @@ Rails.application.routes.draw do
         # Authenticated admins already matched: no unauthenticated :admin
         root 'devise/sessions#new'
       end
-    end
-  end
-
-  resources :clients do
-    member do
-      get 'edit_workspaces'
-      post 'update_workspaces'
-    end
-  end
-
-  resources :workspaces do
-    member do
-      get 'edit_clients'
-      get 'edit_workers'
-      post 'update_clients'
-      post 'update_workers'
-      patch 'transfer_supervision'
-      get 'get_workers'
     end
   end
 

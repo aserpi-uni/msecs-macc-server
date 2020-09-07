@@ -13,16 +13,20 @@ class ProjectPolicy < ApplicationPolicy
         (@user.is_a?(Worker) && @project.workspace.workers.include?(@user))
   end
 
+  def show_cost?
+    update?
+  end
+
   def create?
     @user.is_a? Admin
   end
 
   def update?
-    create?
+    @project.workspace.admin == @user
   end
 
   def destroy?
-    create?
+    @project.workspace.admin == @user
   end
 
   class Scope < Scope

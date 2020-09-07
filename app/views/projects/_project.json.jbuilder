@@ -7,6 +7,10 @@ json.activities project.activities do |activity|
   json.partial! "activities/activity_reference", activity: activity
 end
 
+json.client do
+  json.partial! "clients/client_reference", client: project.client
+end
+
 json.workspace do
   json.name project.workspace.name
   json.url workspace_url(project.workspace, format: :json)

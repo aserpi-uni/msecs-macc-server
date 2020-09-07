@@ -1,0 +1,65 @@
+<% title = @activity.description %>
+
+<% provide :section, 'project' %>
+<% provide :title, title %>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb shadow-sm">
+    <%= render 'application/breadcrumbs/control_panel' %>
+    <%= render 'application/breadcrumbs/projects', active: false %>
+    <%= render 'application/breadcrumbs/resource', active: false, name: @project.project_name, resource: @project %>
+    <%= render 'application/breadcrumbs/activities' %>
+    <%= render 'application/breadcrumbs/resource', active: true, name: @activity.description, resource: [@project, @activity] %>
+  </ol>
+</nav>
+
+<div class="jumbotron align-items-center">
+  <h2 class="d-flex align-items-center">
+    <%= title %>
+
+    <%= button_to edit_project_activity_path(@project, @activity), method: :get, class: "btn btn-compact btn-outline-primary btn-sm" do %>
+      <span class="material-icons">edit</span>
+    <% end %>
+
+    <div style="box-sizing: inherit">
+      <%= button_tag id: :cost, class: "btn btn-compact btn-outline-primary btn-sm" do %>
+        <span class="material-icons">euro</span>
+      <% end %>
+    </div>
+  </h2>
+
+
+  <h4 class="d-flex align-items-center mt-3">
+    <%= Subactivity.model_name.human.pluralize.capitalize %> (<%= @activity.subactivities.count %>)
+  </h4>
+
+  <div class="list-group list-group-flush">
+    <% @activity.subactivities.each do |subactivity| %>
+      <div class="list-group-item list-group-item-flush">
+        <% icon = status_icon(subactivity) %>
+        <span class="material-icons" style="color: <%= icon[:color] %>;margin-right: 8px;">
+          <%= icon[:icon] %>
+        </span>
+
+        <%= subactivity.description %>
+
+        <%= link_to subactivity.worker_1.email, subactivity.worker_1 %>
+
+        <%= link_to subactivity.worker_2.email, subactivity.worker_2 %>
+
+        <%= link_to subactivity.worker_3.email, subactivity.worker_3 %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+    $(window).on("load", function () {
+        const cost = $('#cost');
+        cost.click(function () {
+            $.get("<%= show_cost_project_activity_path(@project, @activity) %>", function (data) {
+                cost.html(data["cost"]);
+            })
+        })
+    });
+</script>

@@ -1,4 +1,12 @@
-<%= form_with(model: @project, local: true) do |form| %>
+<% provide :javascript, javascript_pack_tag('projects', 'data-turbolinks-track': 'reload') %>
+
+<script>
+  const workspacesClients = JSON.parse('<%= policy_scope(Workspace).map { |w|
+    [w.id, w.clients.map { |c| [c.id, c.name]  }.to_h]
+  }.to_h.to_json.html_safe %>');
+</script>
+
+<%= form_with(model: project, local: true) do |form| %>
   <%= render partial: 'error_messages', locals: { resource: project } %>
 
   <div class="form-group floating-label">
@@ -13,15 +21,16 @@
 
   <div class ="form-group">
     <%= form.label :workspace_id %>
-    <%= form.collection_select :workspace_id, Workspace.all, :id, :name, {}, { class: "form-control" } %>
+    <%= form.collection_select :workspace_id, policy_scope(Workspace), :id, :name,
+                               { include_blank: ! project.persisted? }, { class: "form-control" } %>
+  </div>
+
+  <div class = "form-group">
+    <%= form.label :client_id %>
+    <%= form.collection_select :client_id, [], :id, :name, {}, { class: "form-control", disabled: true } %>
   </div>
 
   <%= render 'application/form/delivery_time', form: form %>
-
-  <div class = "form-group">
-    <%= form.label :current_cost %>
-    <%= form.number_field :current_cost, class: "form-control", step: "0.01"%>
-  </div>
 
   <div class = "form-group">
     <%= form.label :currency %>

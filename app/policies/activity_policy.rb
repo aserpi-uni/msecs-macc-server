@@ -1,38 +1,27 @@
 class ActivityPolicy < ApplicationPolicy
-  attr_reader :admin, :user
 
-  def initialize(user, activity)
+  def initialize(user, project)
     @user = user
-    @activity = activity
-  end
-
-  def index?
-    @user.is_a? Admin
+    @project = project
   end
 
   def show?
-    @activity.admin == @user
+    @project.workspace.workers.include?(@user) || @project.workspace.admin == @user
+  end
+
+  def show_cost?
+    create?
   end
 
   def create?
-    @user.is_a? Admin
+    @project.workspace.admin == @admin
   end
 
   def update?
-    show?
+    create?
   end
 
   def destroy?
-    show?
-  end
-
-  def transfer_supervision?
-    show?
-  end
-
-  class Scope < Scope
-    def resolve
-      scope.where(admin: @user)
-    end
+    create?
   end
 end

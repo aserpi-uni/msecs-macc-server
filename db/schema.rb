@@ -10,20 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_03_223751) do
+ActiveRecord::Schema.define(version: 2020_09_06_214414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
-    t.datetime "delivery_time"
+    t.date "delivery_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "admin_id", null: false
     t.bigint "project_id", null: false
     t.string "description"
     t.string "status"
-    t.index ["admin_id"], name: "index_activities_on_admin_id"
     t.index ["description"], name: "index_activities_on_description", unique: true
     t.index ["project_id"], name: "index_activities_on_project_id"
   end
@@ -61,16 +59,15 @@ ActiveRecord::Schema.define(version: 2020_09_03_223751) do
 
   create_table "projects", force: :cascade do |t|
     t.string "project_name"
-    t.datetime "delivery_time"
-    t.float "current_cost"
+    t.date "delivery_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "description"
-    t.bigint "admin_id", null: false
     t.string "status"
     t.string "currency"
     t.bigint "workspace_id"
-    t.index ["admin_id"], name: "index_projects_on_admin_id"
+    t.bigint "client_id", null: false
+    t.index ["client_id"], name: "index_projects_on_client_id"
     t.index ["project_name"], name: "index_projects_on_project_name", unique: true
     t.index ["workspace_id"], name: "index_projects_on_workspace_id"
   end
@@ -84,6 +81,7 @@ ActiveRecord::Schema.define(version: 2020_09_03_223751) do
     t.bigint "worker_3_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.date "delivery_time"
     t.index ["activity_id"], name: "index_subactivities_on_activity_id"
     t.index ["worker_1_id"], name: "index_subactivities_on_worker_1_id"
     t.index ["worker_2_id"], name: "index_subactivities_on_worker_2_id"
@@ -149,9 +147,8 @@ ActiveRecord::Schema.define(version: 2020_09_03_223751) do
     t.index ["name"], name: "index_workspaces_on_name", unique: true
   end
 
-  add_foreign_key "activities", "admins"
   add_foreign_key "activities", "projects"
-  add_foreign_key "projects", "admins"
+  add_foreign_key "projects", "clients"
   add_foreign_key "projects", "workspaces"
   add_foreign_key "subactivities", "activities"
   add_foreign_key "subactivities", "workers", column: "worker_1_id"

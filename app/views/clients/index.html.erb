@@ -33,8 +33,14 @@
           </small>
         </span>
 
-        <span class="badge badge-primary badge-pill" data-toggle="tooltip" data-placement="top" title="<%= Workspace.model_name.human.capitalize.pluralize %>">
-          <%= client.workspaces.count %>
+        <span>
+          <span class="badge badge-primary badge-pill" data-toggle="tooltip" data-placement="top" title="<%= Project.model_name.human.capitalize.pluralize %>">
+            <%= client.projects.count %>
+          </span>
+
+          <span class="badge badge-primary badge-pill" data-toggle="tooltip" data-placement="top" title="<%= Workspace.model_name.human.capitalize.pluralize %>">
+            <%= client.workspaces.count %>
+          </span>
         </span>
       </div>
     <% end %>
