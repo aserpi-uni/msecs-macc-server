@@ -9,6 +9,10 @@ class ActivityPolicy < ApplicationPolicy
     @project.workspace.workers.include?(@user) || @project.workspace.admin == @user
   end
 
+  def show_cost?
+    create?
+  end
+
   def create?
     @project.workspace.admin == @admin
   end

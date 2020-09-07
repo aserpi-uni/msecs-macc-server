@@ -1,11 +1,22 @@
 class ActivitiesController < ApplicationController
   after_action :verify_authorized
   before_action :set_project
-  before_action :set_activity, only: [:show, :edit, :update, :destroy]
-  before_action(only: %i[show new create edit update destroy]) { authorize @project }
+  before_action :set_activity, only: [:show, :show_cost, :edit, :update, :destroy]
+  before_action(only: %i[show show_cost new create edit update destroy]) { authorize @project }
 
   # GET /projects/1/activities/1
   def show; end
+
+  # GET /projects/1/activities/1/show_cost
+  def show_cost
+    bank = Money.default_bank
+    bank.update_rates
+
+    query = Worker.joins(:workingschedules, workingschedules: :subactivity)
+                .where(subactivities: {activity_id: 4})
+                .select(:hours, :bill_rate_cents, :currency)
+    @cost = query.map { |h, b, c| bank.exchange(h * b, c, project.currency) }.sum
+  end
 
   # GET /projects/1/activities/new
   def new

@@ -12,7 +12,11 @@ Rails.application.routes.draw do
   end
 
   resources :projects do
+    get 'show_cost', on: :member
+
     resources :activities, except: :index do
+      get 'show_cost', on: :member
+
       resources :subactivities, except: :index
     end
   end

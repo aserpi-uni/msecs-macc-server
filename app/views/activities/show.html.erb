@@ -20,6 +20,12 @@
     <%= button_to edit_project_activity_path(@project, @activity), method: :get, class: "btn btn-compact btn-outline-primary btn-sm" do %>
       <span class="material-icons">edit</span>
     <% end %>
+
+    <div style="box-sizing: inherit">
+      <%= button_tag id: :cost, class: "btn btn-compact btn-outline-primary btn-sm" do %>
+        <span class="material-icons">euro</span>
+      <% end %>
+    </div>
   </h2>
 
 
@@ -46,3 +52,14 @@
     <% end %>
   </div>
 </div>
+
+<script>
+    $(window).on("load", function () {
+        const cost = $('#cost');
+        cost.click(function () {
+            $.get("<%= show_cost_project_activity_path(@project, @activity) %>", function (data) {
+                cost.html(data["cost"]);
+            })
+        })
+    });
+</script>
