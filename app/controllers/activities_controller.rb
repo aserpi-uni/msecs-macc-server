@@ -2,7 +2,7 @@ class ActivitiesController < ApplicationController
   after_action :verify_authorized
   before_action :set_project
   before_action :set_activity, only: [:show, :show_cost, :edit, :update, :destroy]
-  before_action(only: %i[show show_cost new create edit update destroy]) { authorize @project }
+  before_action(only: %i[show show_cost new create edit update destroy]) { authorize @project, policy_class: ActivityPolicy }
 
   # GET /projects/1/activities/1
   def show; end
