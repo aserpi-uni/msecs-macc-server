@@ -1,8 +1,8 @@
 class WorkspacesController < ApplicationController
   after_action :verify_authorized
-  before_action :set_workspace, only: %i[show edit edit_clients edit_workers update update_clients update_workers destroy transfer_supervision]
+  before_action :set_workspace, only: %i[show show_worker_ids edit edit_clients edit_workers update update_clients update_workers destroy transfer_supervision]
   before_action(only: %i[index new create]) { authorize Workspace }
-  before_action(only: %i[show edit edit_clients edit_workers update update_clients update_workers destroy transfer_supervision]) { authorize @workspace }
+  before_action(only: %i[show show_worker_ids edit edit_clients edit_workers update update_clients update_workers destroy transfer_supervision]) { authorize @workspace }
 
   # GET /workspaces
   # GET /workspaces.json
@@ -13,6 +13,10 @@ class WorkspacesController < ApplicationController
   # GET /workspaces/1
   # GET /workspaces/1.json
   def show; end
+
+  # GET /workspaces/1/get_workers
+  # GET /workspaces/1/get_workers.json
+  def show_worker_ids; end
 
   # GET /workspaces/new
   def new
@@ -122,22 +126,6 @@ class WorkspacesController < ApplicationController
     end
   end
 
-  # GET /workspaces/1/get_workers
-  # GET /workspaces/1/get_workers.json
-
-  def get_workers_id
-    respond_to do |format|
-      format.html do
-        redirect_to workspaces_path, flash: { success: I18n.t(:destroy_success,
-                                                              scope: :resource,
-                                                              resource: Workspace.model_name.human.capitalize) }
-      end
-      format.json { head :no_content }
-
-      end
-    end
-  end
-
   # PATCH/PUT /workspaces/1/transfer_ownership
   # PATCH/PUT /workspaces/1/transfer_ownership.json
   def transfer_supervision
@@ -166,3 +154,4 @@ class WorkspacesController < ApplicationController
     params.require(:workspace).permit(%i[description master_id name])
   end
 
+end

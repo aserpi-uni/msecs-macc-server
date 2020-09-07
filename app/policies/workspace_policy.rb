@@ -12,6 +12,10 @@ class WorkspacePolicy < ApplicationPolicy
     (@user.is_a?(Admin) && @workspace.admin == @user) || (@user.is_a?(Worker) && @workspace.workers.include?(@user))
   end
 
+  def show_worker_ids?
+    @workspace.master == @user
+  end
+
   def edit_clients?
     update_clients?
   end

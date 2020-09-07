@@ -2,6 +2,8 @@ class Workspace < ApplicationRecord
   include Updatable
 
   belongs_to :admin
+  belongs_to :master, class_name: Worker.name
+
   has_and_belongs_to_many :clients, after_add: :touch_updated_at, after_remove: :touch_updated_at
   has_and_belongs_to_many :workers, after_add: :touch_updated_at, after_remove: :touch_updated_at
   has_many :projects, :dependent => :destroy
