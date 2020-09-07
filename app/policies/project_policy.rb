@@ -18,11 +18,11 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def update?
-    create?
+    @project.workspace.admin == @user
   end
 
   def destroy?
-    create?
+    @project.workspace.admin == @user
   end
 
   class Scope < Scope

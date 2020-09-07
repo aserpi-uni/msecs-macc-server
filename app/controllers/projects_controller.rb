@@ -1,8 +1,8 @@
 class ProjectsController < ApplicationController
   after_action :verify_authorized
   before_action :set_project, only: %i[show edit update destroy]
-  before_action(only: %i[index new create edit update destroy]) { authorize Project }
-  before_action(only: %i[show]) { authorize @project }
+  before_action(only: %i[index new create]) { authorize Project }
+  before_action(only: %i[show edit update destroy]) { authorize @project }
 
   # GET /projects
   def index
