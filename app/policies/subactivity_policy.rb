@@ -1,39 +1,32 @@
 class SubactivityPolicy < ApplicationPolicy
-  attr_reader :admin, :user
-
-  def initialize(user, subactivity)
+  def initialize(user, activity)
     @user = user
-    @subactivity = subactivity
+    @activity = activity
   end
 
   def index?
-    @user.is_a?(Admin) || @user.is_a?(Worker)
+    @user.is_a? Worker
   end
 
   def show?
-    @user.master || @user == @subactivity.worker_1 || @subactivity.worker_3 || @user == @subactivity.worker_3
-
+    @activity.workspace.master == @user || @user == @activity.worker_1 || @activity.worker_3 || @user == @activity.worker_3
   end
 
   def create?
-    @user.is_a?(Worker) && @user.master
+    @activity.workspace.master == @user
   end
 
   def update?
-    @user == @subactivity.worker_1 || @subactivity.worker_3 || @user == @subactivity.worker_3
+    create?
   end
 
   def destroy?
-    @user.master
-  end
-
-  def transfer_supervision?
-    index?
+    create?
   end
 
   class Scope < Scope
     def resolve
-      scope.where(admin: @user)
+      scope.where(worker_1_id: @user.id).or(scope.where(worker_2_id: @user.id)).or(scope.where(worker_3_id: @user.id))
     end
   end
 end

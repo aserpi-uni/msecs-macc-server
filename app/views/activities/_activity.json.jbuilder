@@ -7,8 +7,7 @@ json.project do
 end
 
 json.subactivities activity.subactivities do |subactivity|
-  json.description subactivity.description
-  json.url project_activity_subactivities_url(activity.project, activity, subactivity, format: :json)
+  json.partial! 'subactivities/subactivity_reference', subactivity: subactivity
 end
 
 json.url project_activity_url(activity.project, activity, format: :json)

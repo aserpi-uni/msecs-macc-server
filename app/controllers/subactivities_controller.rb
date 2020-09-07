@@ -1,31 +1,31 @@
 class SubactivitiesController < ApplicationController
-  before_action :set_subactivity, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized
+  before_action :set_project
+  before_action :set_activity
+  before_action :set_subactivity, only: [:show, :update, :destroy]
+  before_action(only: %i[show create update destroy]) { authorize @activity, policy_class: SubactivityPolicy }
 
   # GET /subactivities
   # GET /subactivities.json
   def index
-    @subactivities = Subactivity.all
+    policy_scope(Subactivity)
   end
 
   # GET /subactivities/1
   # GET /subactivities/1.json
-  def show
-  end
-
-  # GET /subactivities/1/edit
-  def edit
-  end
+  def show; end
 
   # POST /subactivities
   # POST /subactivities.json
   def create
     params = subactivity_params
-    @subactivity = Subactivity.from_params(params)
+    params[:activity] = @activity
+    @subactivity = Subactivity.new(params)
 
     respond_to do |format|
       if @subactivity.save
         format.html { redirect_to @subactivity, notice: 'Subactivity was successfully created.' }
-        format.json { render :show, status: :created, location: @subactivity }
+        format.json { render :show, status: :created, location: [@project, @activity, @subactivity] }
       else
         format.html { render :new }
         format.json { render json: @subactivity.errors, status: :unprocessable_entity }
@@ -58,13 +58,22 @@ class SubactivitiesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_subactivity
-      @subactivity = Subactivity.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def subactivity_params
-      params.require(:subactivity).permit(:description, :status, :activity_id, :worker_1_id, :worker_2_id, :worker_3_id)
-    end
+  def set_project
+    @project = Project.find(params[:project_id])
+  end
+
+  def set_activity
+    @activity = @project.activities.find(params[:activity_id])
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_subactivity
+    @subactivity = @activity.subactivities.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def subactivity_params
+    params.require(:subactivity).permit(:description, :delivery_time, :status, :worker_1_id, :worker_2_id, :worker_3_id)
+  end
 end

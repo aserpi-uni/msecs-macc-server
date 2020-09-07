@@ -10,13 +10,4 @@ class Subactivity < ApplicationRecord
   has_many :workingschedules
 
   validates_presence_of :description
-  def self.from_params(params)
-    subactivity = Subactivity.new
-    subactivity.description = params[:description]
-    subactivity.worker_1 = params[:worker_1]
-    subactivity.worker_2 = params[:worker_2]
-    subactivity.worker_3 = params[:worker_3]
-
-    subactivity
-  end
 end
