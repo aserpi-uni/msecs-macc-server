@@ -14,7 +14,7 @@ class ActivityPolicy < ApplicationPolicy
   end
 
   def create?
-    @project.workspace.admin == @admin
+    @project.workspace.admin == @user
   end
 
   def update?
