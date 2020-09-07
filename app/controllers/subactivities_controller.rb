@@ -2,8 +2,8 @@ class SubactivitiesController < ApplicationController
   after_action :verify_authorized
   before_action :set_project
   before_action :set_activity
-  before_action :set_subactivity, only: [:show, :update, :destroy]
-  before_action(only: %i[show create update destroy]) { authorize @activity, policy_class: SubactivityPolicy }
+  before_action :set_subactivity, only: [:show, :update, :update_status, :destroy]
+  before_action(only: %i[show create update update_status destroy]) { authorize @activity, policy_class: SubactivityPolicy }
 
   # GET /subactivities
   # GET /subactivities.json
@@ -45,6 +45,10 @@ class SubactivitiesController < ApplicationController
         format.json { render json: @subactivity.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def update_status
+    @subactivity.update(params.require(:subactivity).permit(:status))
   end
 
   # DELETE /subactivities/1

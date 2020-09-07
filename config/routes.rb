@@ -17,7 +17,9 @@ Rails.application.routes.draw do
     resources :activities, except: :index do
       get 'show_cost', on: :member
 
-      resources :subactivities, except: :index
+      resources :subactivities, except: :index do
+        patch 'update_status', on: :member
+      end
     end
   end
 

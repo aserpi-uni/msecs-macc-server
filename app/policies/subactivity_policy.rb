@@ -20,6 +20,10 @@ class SubactivityPolicy < ApplicationPolicy
     create?
   end
 
+  def update_status?
+    update?
+  end
+
   def destroy?
     create?
   end
