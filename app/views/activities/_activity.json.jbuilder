@@ -4,8 +4,7 @@ json.deliveryTime activity.delivery_time.iso8601
 json.master(activity.workspace.master_id == current_worker.id) if current_worker
 
 json.project do
-  json.projectName activity.project.project_name
-  json.url project_url(activity.project, format: :json)
+  json.partial! 'projects/project_reference', project: activity.project
 end
 
 json.subactivities activity.subactivities do |subactivity|

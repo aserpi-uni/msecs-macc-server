@@ -1,6 +1,8 @@
 json.extract! subactivity, :description, :status
 json.deliveryTime subactivity.delivery_time.iso8601
 
+json.master(subactivity.workspace.master_id == current_worker.id) if current_worker
+
 json.activity do
   json.partial! 'activities/activity_reference', activity: subactivity.activity
 end

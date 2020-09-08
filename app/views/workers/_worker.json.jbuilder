@@ -5,8 +5,7 @@ json.clients worker.clients do |client|
 end
 
 json.projects worker.projects do |project|
-  json.projectName project.project_name
-  json.url project_url(project, format: :json)
+  json.partial! 'projects/project_reference', project: project
 end
 
 json.workspaces worker.workspaces do |workspace|

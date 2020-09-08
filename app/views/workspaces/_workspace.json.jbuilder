@@ -2,9 +2,12 @@ json.extract! workspace, :description, :name
 
 json.master(workspace.master_id == current_worker.id) if current_worker
 
+json.clients workspace.clients do |client|
+  json.partial! 'clients/client_reference', client: client
+end
+
 json.projects workspace.projects do |project|
-  json.projectName project.project_name
-  json.url project_url(project, format: :json)
+  json.partial! 'projects/project_reference', project: project
 end
 
 json.workers workspace.workers do |worker|
