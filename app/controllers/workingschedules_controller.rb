@@ -5,7 +5,7 @@ class WorkingschedulesController < ApplicationController
   # GET /workingschedules
   # GET /workingschedules.json
   def index
-    @workingschedules = @worker.workingschedules
+    policy_scope(Workingschedule)
   end
 
   # GET /workingschedules/1/edit
@@ -17,7 +17,11 @@ class WorkingschedulesController < ApplicationController
   def create
     params = workingschedule_params
 
-    @workingschedule = @worker.workingschedules.build(params)
+    subactivity_id = (params[:subactivity_url].split('/'))[-1].to_i
+
+    @workingschedule = Workingschedule.new(params)
+    @workingschedule.subactivity_id = subactivity_id
+    @workingschedule.worker_id = @worker.id
 
     respond_to do |format|
       if @workingschedule.save

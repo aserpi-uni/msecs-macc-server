@@ -1,23 +1,27 @@
 class WorkingschedulePolicy < ApplicationPolicy
-  def initialize(user, workingschedule, worker)
-    @logged_user = user
-    @worker = worker
+  def initialize(user, workingschedule)
+    @user = user
     @workingschedule =  workingschedule
   end
 
   def index?
-    @logged_user.is_a? Admin || Worker
+    @user.is_a? Worker
   end
 
   def create?
-    @logged_user.is_a? Worker
+    @user.is_a? Worker
   end
 
   def update?
-    @logged_user == @worker && @worker.master
+    create?
   end
 
   def destroy?
-    @logged_user.is_a? Admin
+    @user.is_a? Admin
   end
-end
+  class Scope < Scope
+    def resolve
+      scope.where(worker_id == @user.id)
+    end
+  end
+  end
