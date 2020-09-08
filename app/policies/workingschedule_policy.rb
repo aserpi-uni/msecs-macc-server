@@ -1,7 +1,7 @@
 class WorkingschedulePolicy < ApplicationPolicy
-  def initialize(user, workingschedule)
+  def initialize(user, subactivity)
     @user = user
-    @workingschedule =  workingschedule
+    @subactivity =  subactivity
   end
 
   def index?
@@ -9,7 +9,7 @@ class WorkingschedulePolicy < ApplicationPolicy
   end
 
   def create?
-    @user.is_a? Worker
+    @subactivity.worker_1 == @user || @subactivity.worker_2 == @user || @subactivity.worker_3 == @user
   end
 
   def update?
@@ -19,9 +19,10 @@ class WorkingschedulePolicy < ApplicationPolicy
   def destroy?
     @user.is_a? Admin
   end
+  
   class Scope < Scope
     def resolve
-      scope.where(worker_id == @user.id)
+      scope.where(worker_id: @user.id)
     end
   end
-  end
+end

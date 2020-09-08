@@ -22,8 +22,8 @@ json.worker_3 do
   json.url worker_url(subactivity.worker_3, format: :json)
 end
 
-json.workingschedules subactivity.workingschedules do |workingschedule|
-  json.url workingschedule_url(workingschedule, format: :json)
+json.workingschedules policy_scope(subactivity.workingschedules).order(date: :desc) do |workingschedule|
+  json.partial! 'workingschedules/workingschedule', workingschedule: workingschedule
 end
 
 json.url project_activity_subactivity_url(subactivity.activity.project, subactivity.activity, subactivity, format: :json)

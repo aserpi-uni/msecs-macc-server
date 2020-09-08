@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
       resources :subactivities, except: :index do
         patch 'update_status', on: :member
+
+        resources :workingschedules
       end
     end
   end
@@ -26,8 +28,6 @@ Rails.application.routes.draw do
   resources :workers do
     patch 'update_master', on: :member
   end
-
-  resources :workingschedules
 
   resources :workspaces do
     member do

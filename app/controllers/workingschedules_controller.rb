@@ -1,6 +1,9 @@
 class WorkingschedulesController < ApplicationController
-  before_action :get_worker
-  before_action :set_workingschedule, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized
+  before_action :set_project
+  before_action :set_activity
+  before_action :set_subactivity
+  before_action(only: %i[create]) { authorize @subactivity, policy_class: WorkingschedulePolicy }
 
   # GET /workingschedules
   # GET /workingschedules.json
@@ -17,16 +20,14 @@ class WorkingschedulesController < ApplicationController
   def create
     params = workingschedule_params
 
-    subactivity_id = (params[:subactivity_url].split('/'))[-1].to_i
-
     @workingschedule = Workingschedule.new(params)
-    @workingschedule.subactivity_id = subactivity_id
-    @workingschedule.worker_id = @worker.id
+    @workingschedule.subactivity = @subactivity
+    @workingschedule.worker = current_worker
 
     respond_to do |format|
       if @workingschedule.save
-        format.html { redirect_to @workingschedule, notice: 'Workingschedule was successfully created.' }
-        format.json { render :show, status: :created, location: @workingschedule }
+        format.html { redirect_to project_activity_subactivity_workingschedule_path(@project, @activity, @subactivity, @workingschedule), notice: 'Workingschedule was successfully created.' }
+        format.json { render :show, status: :created, location: project_activity_subactivity_workingschedule_path(@project, @activity, @subactivity, @workingschedule) }
       else
         format.html { render :new }
         format.json { render json: @workingschedule.errors, status: :unprocessable_entity }
@@ -39,8 +40,8 @@ class WorkingschedulesController < ApplicationController
   def update
     respond_to do |format|
       if @workingschedule.update(workingschedule_params)
-        format.html { redirect_to @workingschedule, notice: 'Workingschedule was successfully updated.' }
-        format.json { render :show, status: :ok, location: @workingschedule }
+        format.html { redirect_to project_activity_subactivity_workingschedule_path(@project, @activity, @subactivity, @workingschedule), notice: 'Workingschedule was successfully updated.' }
+        format.json { render :show, status: :ok, location: project_activity_subactivity_workingschedule_path(@project, @activity, @subactivity, @workingschedule) }
       else
         format.html { render :edit }
         format.json { render json: @workingschedule.errors, status: :unprocessable_entity }
@@ -53,23 +54,31 @@ class WorkingschedulesController < ApplicationController
   def destroy
     @workingschedule.destroy
     respond_to do |format|
-      format.html { redirect_to workingschedules_url, notice: 'Workingschedule was successfully destroyed.' }
+      format.html { redirect_to project_activity_subactivity_workingschedules_path(@project, @activity, @subactivity), notice: 'Workingschedule was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_workingschedule
-      @workingschedule = @worker.workingschedules.find(params[:id])
-    end
+  def set_activity
+    @activity = @project.activities.find(params[:activity_id])
+  end
 
-    def get_worker
-      @worker = Worker.find(params[:worker_id])
-    end
+  def set_project
+    @project = Project.find(params[:project_id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def workingschedule_params
-      params.require(:workingschedule).permit(:hours, :date, :worker_id, :activity_id, :subactivity_id)
-    end
+  def set_subactivity
+    @subactivity = @activity.subactivities.find(params[:subactivity_id])
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_workingschedule
+    @workingschedule = @worker.workingschedules.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def workingschedule_params
+    params.require(:workingschedule).permit(:hours, :date)
+  end
 end
