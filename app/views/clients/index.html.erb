@@ -35,11 +35,11 @@
 
         <span>
           <span class="badge badge-primary badge-pill" data-toggle="tooltip" data-placement="top" title="<%= Project.model_name.human.capitalize.pluralize %>">
-            <%= client.projects.count %>
+            <%= policy_scope(client.projects).count %>
           </span>
 
           <span class="badge badge-primary badge-pill" data-toggle="tooltip" data-placement="top" title="<%= Workspace.model_name.human.capitalize.pluralize %>">
-            <%= client.workspaces.count %>
+            <%= policy_scope(client.workspaces).count %>
           </span>
         </span>
       </div>

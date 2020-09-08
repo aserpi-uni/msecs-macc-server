@@ -32,7 +32,7 @@
         <% end %>
 
         <span class="badge badge-primary badge-pill" data-toggle="tooltip" data-placement="top" title="<%= Workspace.model_name.human.capitalize.pluralize %>">
-          <%= worker.workspaces.count %>
+          <%= policy_scope(worker.workspaces).count %>
         </span>
       </div>
     <% end %>

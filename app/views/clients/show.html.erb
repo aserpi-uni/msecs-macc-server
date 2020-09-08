@@ -26,8 +26,9 @@
     <%= @client.description %>
   </span>
 
+  <% workspaces = policy_scope(@client.workspaces) %>
   <h4 class="d-flex align-items-center mt-3">
-    <%= Workspace.model_name.human.pluralize.capitalize %> (<%= @client.workspaces.count %>)
+    <%= Workspace.model_name.human.pluralize.capitalize %> (<%= workspaces.count %>)
 
     <%= button_to edit_workspaces_client_path(@client), method: :get, class: "btn btn-compact btn-outline-primary btn-sm" do %>
       <span class="material-icons">group_add</span>
@@ -35,7 +36,7 @@
   </h4>
 
   <div class="list-group list-group-flush">
-    <% @client.workspaces.each do |workspace| %>
+    <% workspaces.each do |workspace| %>
       <div class="list-group-item list-group-item-flush">
         <% if workspace.admin == current_admin %>
           <%= link_to workspace.name, workspace %>
@@ -46,12 +47,13 @@
     <% end %>
   </div>
 
+  <% projects = policy_scope(@client.projects) %>
   <h4 class="d-flex align-items-center mt-3">
-    <%= Project.model_name.human.pluralize.capitalize %> (<%= @client.projects.count %>)
+    <%= Project.model_name.human.pluralize.capitalize %> (<%= projects.count %>)
   </h4>
 
   <div class="list-group list-group-flush">
-    <% @client.projects.each do |project| %>
+    <% projects.each do |project| %>
       <div class="list-group-item list-group-item-flush">
         <%= link_to project do %>
           <% icon = status_icon(project) %>
