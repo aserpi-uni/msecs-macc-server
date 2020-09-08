@@ -2,13 +2,11 @@ class Workspace < ApplicationRecord
   include Updatable
 
   belongs_to :admin
-  belongs_to :master, class_name: Worker.name
+  belongs_to :master, class_name: Worker.name, optional: true
 
   has_and_belongs_to_many :clients, after_add: :touch_updated_at, after_remove: :touch_updated_at
   has_and_belongs_to_many :workers, after_add: :touch_updated_at, after_remove: :touch_updated_at
   has_many :projects, :dependent => :destroy
-
-  validate :master_in_workers
 
   # Create a new Workspace from +create+ action parameters.
   def self.from_params(params)
@@ -29,14 +27,5 @@ class Workspace < ApplicationRecord
 
     self.admin = new_admin
     save
-  end
-
-  private
-
-  def master_in_workers
-    if (worker_ids.empty? && ! master_id.nil?) ||
-        ! (worker_ids.empty? || worker_ids.include?(master_id))
-      errors.add(:master, I18n.t(:failed, scope: %i[workspace update_master]))
-    end
   end
 end
