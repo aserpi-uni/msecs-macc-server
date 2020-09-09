@@ -15,7 +15,7 @@ class ActivitiesController < ApplicationController
     query = Worker.joins(:workingschedules, workingschedules: :subactivity)
                 .where(subactivities: {activity_id: @activity.id})
                 .select(:hours, :bill_rate_cents, :currency)
-    @cost = Money.new(query.map { |q| bank.exchange(q.hours * q.bill_rate_cents, q.currency, @activity.currency) }.sum, @activity.currency)
+    @cost = Money.new(query.map { |q| bank.exchange(q.hours * q.bill_rate_cents, q.currency, @project.currency) }.sum, @project.currency)
   end
 
   # GET /projects/1/activities/new
