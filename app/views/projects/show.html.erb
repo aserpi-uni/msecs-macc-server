@@ -67,7 +67,7 @@
     $(window).on("load", function () {
         const cost = $('#cost');
         cost.click(function () {
-            $.get("<%= show_cost_project_path(@project) %>", function (data) {
+            $.get("<%= show_cost_project_url(@project) %>", function (data) {
                 cost.html(data["cost"]);
             })
         })
