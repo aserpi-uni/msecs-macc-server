@@ -32,7 +32,13 @@
             <span class="custom-control-track"></span>
 
             <%= form.label "worker_#{worker.id}", class: "custom-control-label" do %>
-              <%= link_to worker.email, worker %>
+              <%= link_to worker do %>
+                <%= worker.email %>
+
+                <% if worker.master %>
+                  <span class="material-icons" style="margin-left: 8px;">psychology</span>
+                <% end %>
+              <% end %>
             <% end %>
           </div>
         </div>
