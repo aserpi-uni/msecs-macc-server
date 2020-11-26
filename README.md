@@ -1,24 +1,12 @@
-# README
+# KeepTime
+KeepTime is an enterprise-oriented collaborative time tracker.
+It is composed by two parts: an [Android application](https://github.com/aserpi/msecs-macc-app) and a Rails server.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Server
+The server acts both as an API backed for the app and as a control panel for system administrators.
+Admins can create and modify employees, workspaces, clients, projects and activities and check the current cost for each element.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## App
+The application is for exclusive use of workers.
+They can change their bill rate and add new schedule items.
+Project masters can also create and modify new tasks and assign workers to them.
